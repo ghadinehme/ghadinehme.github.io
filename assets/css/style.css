@@ -156,10 +156,11 @@ ul { margin: 0; padding-left: 1.2em; }
 }
 .side-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; font-size: .9rem; }
 .side-card h4 { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; font-weight: 600; }
-.side-card .edu-mini { display: grid; gap: 6px; }
+.side-card .edu-mini { display: grid; gap: 9px; }
 .side-card .edu-mini div { line-height: 1.35; }
 .side-card .edu-mini b { color: var(--ink); font-weight: 600; }
 .side-card .edu-mini span { color: var(--muted); font-size: .84rem; display: block; }
+.side-card .edu-mini span.yr { font-size: .76rem; font-weight: 600; font-variant-numeric: tabular-nums; margin-top: 1px; }
 
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 44px; }
 .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; }
