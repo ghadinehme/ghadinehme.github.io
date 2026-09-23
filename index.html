@@ -16,7 +16,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=6">
+  <link rel="stylesheet" href="assets/css/style.css?v=7">
+  <script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  } }
+  </script>
+
   <script>
     (function () {
       try {
@@ -183,6 +190,24 @@
       </div>
     </div>
 
+    <!-- Interactive CAD demo: point cloud -> editable CAD program -->
+    <div class="cad-stage reveal" id="cadStage" data-models="assets/models">
+      <div class="cad-view">
+        <canvas id="cadCanvas" aria-label="3D model of a mechanical part being reconstructed as CAD, feature by feature"></canvas>
+        <div class="cad-hud">
+          <span class="cad-pill"><span class="dot"></span><span id="cadStatus">Loading model…</span></span>
+          <span class="cad-hint">Drag to rotate</span>
+        </div>
+      </div>
+      <aside class="cad-side">
+        <div class="cad-head">
+          <span class="eyebrow">Mesh in, editable CAD out</span>
+          <p>The idea behind <a href="#pub-cadfit">CADFit</a> and CADStudio: recover the <em>design intent</em>, a parametric feature history, from raw 3D geometry.</p>
+        </div>
+        <ol class="cad-tree" id="cadTree"></ol>
+        <pre class="cad-code" id="cadCode" aria-label="Generated CadQuery program"></pre>
+      </aside>
+    </div>
   </div>
 </section>
 
@@ -930,5 +955,6 @@
 <button class="icon-btn to-top" id="toTop" aria-label="Back to top"><svg><use href="#i-up"/></svg></button>
 
 <script src="assets/js/main.js?v=6"></script>
+<script type="module" src="assets/js/hero3d.js?v=1"></script>
 </body>
 </html>
