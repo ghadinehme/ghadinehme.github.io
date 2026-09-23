@@ -34,25 +34,22 @@
     if (!video || !stepsEl) return;
     var STAGES = [
       ['mesh', 'Input mesh', 3000], ['sketch', 'Extract sections', 4200], ['extrude', 'Search: Extrude height', 5200],
-      ['revolve', 'Search: Revolve angle', 3800], ['greedy', 'IoU-guided selection', 4200],
-      ['residual', 'Residual refinement', 3800], ['done', 'Construction sequence', 4200]
+      ['revolve', 'Search: Revolve angle', 3800], ['greedy', 'IoU-guided selection', 3800],
+      ['residual', 'Residual refinement', 5200], ['done', 'Construction sequence', 4200]
     ];
     var CODE = [
-      ['extrude', '<c># 1 · profile from a planar face</c>'],
-      ['extrude', 'plane_1 = cq.Plane(origin, normal, xDir)'],
-      ['extrude', 'sketch_1 = cq.Workplane(plane_1)'],
-      ['extrude', 'loop_1 = sketch_1.moveTo(p0)'],
-      ['extrude', 'loop_1 = loop_1.threePointArc(p1, p2)  <c># ×48</c>'],
-      ['extrude', 'solid_1 = sketch_1.<k>extrude</k>(<n>0.57</n>)'],
-      ['revolve', '<c># 2 · profile from an axis-aligned section</c>'],
-      ['revolve', 'plane_2 = cq.Plane(origin, normal, xDir)'],
-      ['revolve', 'sketch_2 = cq.Workplane(plane_2).moveTo(p0)'],
-      ['revolve', 'sketch_2 = sketch_2.lineTo(p1)  <c># ×11</c>'],
-      ['revolve', 'solid_2 = sketch_2.<k>revolve</k>(<n>360</n>, axisStart, axisEnd)'],
-      ['greedy', 'result = solid_2.<k>union</k>(solid_1)'],
-      ['residual', '<c># 3 · residual refinement</c>'],
-      ['residual', 'residual = ex_a.union(ex_b).union(ex_c)'],
-      ['residual', 'result = result.<k>cut</k>(residual)']
+      ['revolve', '<c># 1 · profile from an axis-aligned section</c>'],
+      ['revolve', 'plane_1 = cq.Plane(origin, normal, xDir)'],
+      ['revolve', 'sketch_1 = cq.Workplane(plane_1).moveTo(p0)'],
+      ['revolve', 'sketch_1 = sketch_1.lineTo(p1)  <c># ×11</c>'],
+      ['revolve', 'solid_1 = sketch_1.<k>revolve</k>(<n>360</n>, axisStart, axisEnd)'],
+      ['greedy', 'result = solid_1  <c># IoU 0.952</c>'],
+      ['residual', '<c># 2 · residual R⁺: missing belt teeth</c>'],
+      ['residual', 'plane_2 = cq.Plane(origin, normal, xDir)'],
+      ['residual', 'loop_2 = cq.Workplane(plane_2).moveTo(p0)'],
+      ['residual', 'loop_2 = loop_2.threePointArc(p1, p2)  <c># ×48</c>'],
+      ['residual', 'solid_2 = loop_2.<k>extrude</k>(<n>0.57</n>)'],
+      ['residual', 'result = result.<k>union</k>(solid_2)  <c># IoU 0.993</c>']
     ];
     var order = STAGES.map(function (s) { return s[0]; });
     var starts = []; var acc = 0;
