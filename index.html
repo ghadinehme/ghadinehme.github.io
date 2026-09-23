@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=7">
+  <link rel="stylesheet" href="assets/css/style.css?v=9">
   <script type="importmap">
   { "imports": {
       "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
@@ -89,6 +89,7 @@
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
+      <li><a href="#research">Research</a></li>
       <li><a href="#news">News</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -190,22 +191,119 @@
       </div>
     </div>
 
-    <!-- Interactive CAD demo: point cloud -> editable CAD program -->
-    <div class="cad-stage reveal" id="cadStage" data-models="assets/models">
-      <div class="cad-view">
-        <canvas id="cadCanvas" aria-label="3D model of a mechanical part being reconstructed as CAD, feature by feature"></canvas>
-        <div class="cad-hud">
-          <span class="cad-pill"><span class="dot"></span><span id="cadStatus">Loading model…</span></span>
-          <span class="cad-hint">Drag to rotate</span>
+  </div>
+</section>
+
+<!-- ======================= RESEARCH SHOWCASE ======================= -->
+<section class="block showcase" id="research">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">RESEARCH IN MOTION</span>
+        <h2>How my methods work</h2>
+        <p>Interactive walkthroughs built from real examples and data from the papers.</p>
+      </div>
+      <div class="sc-tabs" role="tablist" aria-label="Research showcase">
+        <button class="sc-tab active" role="tab" aria-selected="true" data-tab="cadfit">CADFit</button>
+        <button class="sc-tab" role="tab" aria-selected="false" data-tab="lamp">LAMP</button>
+        <button class="sc-tab" role="tab" aria-selected="false" data-tab="videocad">VideoCAD</button>
+      </div>
+    </div>
+
+    <!-- CADFit -->
+    <div class="sc-stage sc-panel active" id="panel-cadfit" data-panel="cadfit" role="tabpanel">
+      <div class="sc-view">
+        <canvas id="cfCanvas" aria-label="CADFit reconstructing a timing pulley from a mesh"></canvas>
+        <div class="sc-hud">
+          <span class="sc-pill"><span class="dot"></span><span id="cfStatus">Loading…</span></span>
+          <span class="sc-iou" id="cfIou" hidden>IoU <b>0.000</b></span>
+        </div>
+        <div class="cf-chart" id="cfChart" hidden></div>
+      </div>
+      <aside class="sc-side">
+        <div class="sc-head">
+          <span class="eyebrow">CADFit · ICML 2026</span>
+          <p>Input: a mesh. Output: an editable CAD <em>construction sequence</em>. Shown on the timing-pulley example from the paper.</p>
+        </div>
+        <ol class="cf-steps" id="cfSteps"></ol>
+        <pre class="sc-code" id="cfCode" aria-label="CadQuery program"></pre>
+        <div class="sc-links"><a href="#pub-cadfit">Paper</a><a href="https://ghadinehme.github.io/cadfit.github.io/" target="_blank" rel="noopener">Project page</a><a href="https://github.com/ghadinehme/CADFit" target="_blank" rel="noopener">Code</a></div>
+      </aside>
+    </div>
+
+    <!-- LAMP -->
+    <div class="sc-stage sc-panel" id="panel-lamp" data-panel="lamp" role="tabpanel" hidden>
+      <div class="sc-view lamp-view">
+        <div class="lamp-img"><img id="lampImg" alt="LAMP-generated car shape" width="568" height="336"></div>
+        <div class="lamp-ctrl">
+          <div class="lamp-readout"><span id="lampParam">Roof height</span><b id="lampZone">Dataset range</b></div>
+          <div class="lamp-track">
+            <div class="lamp-zones"><span class="ex">Extrapolation</span><span class="in">Training range</span><span class="ex">Extrapolation</span></div>
+            <input type="range" id="lampSlider" min="0" max="9" step="1" value="4" aria-label="Design parameter">
+          </div>
+          <div class="lamp-legend"><span>−100% extrapolation</span><span>training range</span><span>+100% extrapolation</span></div>
+          <div class="lamp-chips" id="lampChips"></div>
+          <button type="button" class="lamp-opt-btn" id="lampOptBtn">Show drag optimization</button>
+        </div>
+        <figure class="lamp-opt" id="lampOpt" hidden>
+          <img src="assets/showcase/lamp/drag_optimization.jpg" alt="Reference cars versus LAMP-optimized cars with drag coefficient reduced by about 10 percent" loading="lazy">
+          <figcaption>Performance-guided optimization: with the design parameters held fixed, LAMP searches its weight space for lower-drag shapes, reducing C<sub>d</sub> by up to ~10%.</figcaption>
+        </figure>
+      </div>
+      <aside class="sc-side">
+        <div class="sc-head">
+          <span class="eyebrow">LAMP · ICML 2026</span>
+          <p>Drag the slider. Every shape is generated by LAMP from a small set of examples, including shapes up to 100% beyond the training range.</p>
+        </div>
+        <ol class="sc-list">
+          <li><b>Align.</b> Overfit one SDF network per exemplar from a shared initialization, so all shapes live in one aligned weight space.</li>
+          <li><b>Mix.</b> Solve for affine weights <code>w = &Sigma; &alpha;<sub>i</sub> w<sub>i</sub></code>, with <code>&Sigma; &alpha;<sub>i</sub> = 1</code>, that hit the requested parameter values.</li>
+          <li><b>Decode.</b> Extract the mesh with marching cubes. A linearity-mismatch score flags unsafe extrapolations.</li>
+          <li><b>Optimize.</b> With parameters fixed, search the same space for better performance, such as lower aerodynamic drag.</li>
+        </ol>
+        <div class="sc-stats"><div><b>50</b><span>training shapes</span></div><div><b>±100%</b><span>safe extrapolation</span></div></div>
+        <div class="sc-links"><a href="#pub-lamp">Paper</a><a href="https://ghadinehme.github.io/lamp.github.io/" target="_blank" rel="noopener">Project page</a><a href="https://github.com/ghadinehme/LAMP" target="_blank" rel="noopener">Code</a></div>
+      </aside>
+    </div>
+
+    <!-- VideoCAD -->
+    <div class="sc-stage sc-panel" id="panel-videocad" data-panel="videocad" role="tabpanel" hidden>
+      <div class="sc-view vc-view">
+        <div class="vc-modes" role="tablist" aria-label="VideoCAD views">
+          <button class="vc-mode active" data-mode="episodes" type="button">Dataset episodes</button>
+          <button class="vc-mode" data-mode="i2c" type="button">Image → CAD</button>
+          <button class="vc-mode" data-mode="auto" type="button">Autocomplete</button>
+        </div>
+        <div class="vc-pane" data-mode="episodes">
+          <div class="vc-browser">
+            <div class="vc-bar"><i></i><i></i><i></i><span>cad.onshape.com · VideoCAD episode <b id="vcId"></b></span></div>
+            <img id="vcVideo" alt="Automated agent building a CAD model in the Onshape interface">
+          </div>
+          <div class="vc-picker" id="vcPicker" aria-label="Choose an episode"></div>
+        </div>
+        <div class="vc-pane" data-mode="i2c" hidden>
+          <p class="vc-note">VideoCADFormer sees only a target image and the live UI, and operates Onshape action by action to build the CAD model.</p>
+          <div class="vc-grid" id="vcI2C"></div>
+        </div>
+        <div class="vc-pane" data-mode="auto" hidden>
+          <p class="vc-note">Starting from a partially built model, VideoCADFormer completes the design to match the target image.</p>
+          <div class="vc-grid auto" id="vcAuto"></div>
         </div>
       </div>
-      <aside class="cad-side">
-        <div class="cad-head">
-          <span class="eyebrow">Mesh in, editable CAD out</span>
-          <p>The idea behind <a href="#pub-cadfit">CADFit</a> and CADStudio: recover the <em>design intent</em>, a parametric feature history, from raw 3D geometry.</p>
+      <aside class="sc-side">
+        <div class="sc-head">
+          <span class="eyebrow">VideoCAD · NeurIPS 2025</span>
+          <p>Real episodes from the dataset: an automated agent rebuilds human-made CAD models in Onshape, one UI action at a time.</p>
         </div>
-        <ol class="cad-tree" id="cadTree"></ol>
-        <pre class="cad-code" id="cadCode" aria-label="Generated CadQuery program"></pre>
+        <div class="vc-policy">
+          <div class="vc-in"><img id="vcTarget" alt="Target shape" width="96" height="96"><span>Target shape <code>I</code></span></div>
+          <div class="vc-arrow">+ UI frames <code>o<sub>t−k:t</sub></code> &rarr; <b>VideoCADFormer</b> &rarr; next action <code>a<sub>t</sub></code></div>
+        </div>
+        <div class="vc-actions">
+          <span>MoveTo(x, y)</span><span>Click</span><span>PressKey(k, n)</span><span>Type(v)</span><span>Scroll(s)</span>
+        </div>
+        <div class="sc-stats"><div><b>41K+</b><span>annotated videos</span></div><div><b>186</b><span>actions per task on average</span></div><div><b>20&times;</b><span>longer than prior UI datasets</span></div></div>
+        <div class="sc-links"><a href="#pub-videocad">Paper</a><a href="https://ghadinehme.github.io/videocad.github.io/" target="_blank" rel="noopener">Project page</a><a href="https://github.com/ghadinehme/VideoCAD" target="_blank" rel="noopener">Code</a></div>
       </aside>
     </div>
   </div>
@@ -955,6 +1053,7 @@
 <button class="icon-btn to-top" id="toTop" aria-label="Back to top"><svg><use href="#i-up"/></svg></button>
 
 <script src="assets/js/main.js?v=6"></script>
-<script type="module" src="assets/js/hero3d.js?v=1"></script>
+<script src="assets/js/showcase.js?v=2"></script>
+<script type="module" src="assets/js/cadfit3d.js?v=2"></script>
 </body>
 </html>
