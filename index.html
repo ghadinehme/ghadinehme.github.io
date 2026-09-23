@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ghadi Nehme · MIT PhD Student in AI for Design</title>
+  <meta name="description" content="Ghadi Nehme is a PhD student at MIT (DeCoDe Lab, advised by Prof. Faez Ahmed) working on AI for multimodal CAD generation, 3D generative modeling, and AI agents for engineering design.">
+  <meta name="author" content="Ghadi Nehme">
+  <meta property="og:title" content="Ghadi Nehme · MIT">
+  <meta property="og:description" content="PhD student at MIT working on AI for CAD: VideoCAD (NeurIPS 2025), CADFit & LAMP (ICML 2026), FLARE (IDETC 2026 Best Paper).">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/img/og.jpg">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Ghadi Nehme",
+    "jobTitle": "PhD Student",
+    "affiliation": { "@type": "Organization", "name": "Massachusetts Institute of Technology" },
+    "alumniOf": ["Stanford University", "École Polytechnique"],
+    "email": "mailto:ghadi@mit.edu",
+    "url": "https://ghadinehme.github.io/",
+    "sameAs": [
+      "https://scholar.google.com/citations?user=AfQYxYMAAAAJ",
+      "https://github.com/ghadinehme",
+      "https://www.linkedin.com/in/ghadi-nehme/"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- SVG icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-scholar" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zm-6.18 9.72v3.8L12 20l6.18-3.48v-3.8L12 16.2l-6.18-3.48z"/></symbol>
+    <symbol id="i-github" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+    <symbol id="i-pdf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+    <symbol id="i-web" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></symbol>
+    <symbol id="i-video" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="m17 10 5-3v10l-5-3"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h6v6H6a2 2 0 0 1-2-2zM4 13c0 2 1 4 4 4M14 7h6v6h-4a2 2 0 0 1-2-2zM14 13c0 2 1 4 4 4"/></symbol>
+    <symbol id="i-data" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></symbol>
+    <symbol id="i-news" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13v16H6a2 2 0 0 1-2-2zM17 8h3v10a2 2 0 0 1-2 2"/><path d="M8 8h5M8 12h5M8 16h5"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></symbol>
+    <symbol id="i-medal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="6"/><path d="M8.5 10.2 5 3h4l3 6M15.5 10.2 19 3h-4l-2 4"/><path d="m12 12.5.9 1.8 2 .3-1.45 1.4.35 2-1.8-.95-1.8.95.35-2-1.45-1.4 2-.3z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9 12 4 2 9l10 5 10-5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></symbol>
+  </defs>
+</svg>
+
+<!-- ======================= NAV ======================= -->
+<header class="nav" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top">Ghadi Nehme</a>
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#awards">Awards</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="assets/Ghadi_Nehme_CV.pdf" target="_blank" rel="noopener">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="icon-btn theme-btn" id="themeBtn" aria-label="Toggle dark mode">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ======================= HERO / ABOUT ======================= -->
+<section class="hero" id="about">
+  <div class="wrap">
+    <div class="hero-grid">
+      <aside class="hero-side">
+        <div class="portrait">
+          <img src="assets/img/headshot.jpg" alt="Portrait of Ghadi Nehme" width="800" height="1000">
+        </div>
+        <div class="side-card">
+          <h4>Education</h4>
+          <div class="edu-mini">
+            <div><b>PhD, MIT</b><span>Mechanical Eng. · AI for Design · 2024–</span></div>
+            <div><b>MS, Stanford</b><span>Mechanical Engineering · 2022–24</span></div>
+            <div><b>BS, École Polytechnique</b><span>Math &amp; Physics · Valedictorian · 2019–22</span></div>
+          </div>
+        </div>
+      </aside>
+
+      <div>
+        <span class="eyebrow">PhD Student · MIT</span>
+        <h1>Ghadi Nehme</h1>
+        <div class="role">
+          <a href="https://decode.mit.edu/" target="_blank" rel="noopener">DeCoDe Lab</a>,
+          Department of Mechanical Engineering, Massachusetts Institute of Technology
+        </div>
+        <div class="bio">
+          <p>
+            I am a PhD student at <strong>MIT</strong>, advised by
+            <a href="https://decode.mit.edu/" target="_blank" rel="noopener">Prof. Faez Ahmed</a> in the DeCoDe Lab,
+            and a <strong>Jamieson Presidential Fellow</strong> and <strong>GE Vernova Fellow</strong>.
+            My research is on <strong>AI for engineering design</strong>: I build datasets, models, and optimization
+            methods that turn meshes, images, sketches, and videos into <em>precise, editable CAD programs</em>, and
+            agents that learn to operate professional design software.
+          </p>
+          <p>
+            My work has appeared at <strong>NeurIPS</strong>, <strong>ICML</strong>, and <strong>ASME IDETC</strong>, where FLARE
+            received the <strong>Overall Best Paper Award</strong>, and it has been covered by
+            <a href="https://news.mit.edu/2025/new-ai-agent-learns-use-cad-create-3d-objects-sketches-1119" target="_blank" rel="noopener">MIT News</a>.
+            In summer 2026 I was a PhD Research Scientist Intern at <strong>Meta</strong>, building multi-agent systems and
+            an AI-native VR environment for mechanical design.
+          </p>
+          <p>
+            Before MIT, I earned an MS in Mechanical Engineering from <strong>Stanford</strong> (robotics, surgical robots,
+            reinforcement learning, neural decoding) and a BS in Mathematics &amp; Physics from <strong>École Polytechnique</strong>
+            as class valedictorian. I also interned at <strong>Google</strong> and CNRS, and co-founded an AI startup for automating CAD.
+          </p>
+        </div>
+
+        <div class="interests" aria-label="Research interests">
+          <span class="tag">CAD Program Generation</span>
+          <span class="tag">3D Generative Models</span>
+          <span class="tag">UI &amp; Computer-Use Agents</span>
+          <span class="tag">Multimodal LLMs</span>
+          <span class="tag">Surrogate Modeling</span>
+          <span class="tag">Robotics &amp; RL</span>
+        </div>
+
+        <div class="links" style="margin-top:20px">
+          <a class="pill primary" href="mailto:ghadi@mit.edu"><svg><use href="#i-mail"/></svg>ghadi@mit.edu</a>
+          <a class="pill" href="assets/Ghadi_Nehme_CV.pdf" target="_blank" rel="noopener"><svg><use href="#i-file"/></svg>CV</a>
+          <a class="pill" href="https://scholar.google.com/citations?user=AfQYxYMAAAAJ&amp;hl=en" target="_blank" rel="noopener"><svg><use href="#i-scholar"/></svg>Google Scholar</a>
+          <a class="pill" href="https://github.com/ghadinehme" target="_blank" rel="noopener"><svg><use href="#i-github"/></svg>GitHub</a>
+          <a class="pill" href="https://www.linkedin.com/in/ghadi-nehme/" target="_blank" rel="noopener"><svg><use href="#i-linkedin"/></svg>LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><b>3</b><span>first-/co-first-author papers at NeurIPS &amp; ICML</span></div>
+      <div class="stat"><b>2</b><span>Best Paper Awards at ASME IDETC-CIE 2026</span></div>
+      <div class="stat"><b>41K+</b><span>annotated CAD videos released in VideoCAD</span></div>
+      <div class="stat"><b>290+</b><span>GitHub stars on open-source research code</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RESEARCH THEMES ======================= -->
+<section class="block alt" id="research">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">RESEARCH</span>
+        <h2>What I work on</h2>
+        <p>Making engineering design faster, more intuitive, and more collaborative between humans and AI.</p>
+      </div>
+    </div>
+    <div class="themes">
+      <article class="theme reveal">
+        <div class="thumb"><img src="assets/img/pubs/cadfit.jpg" alt="Photos and meshes reconstructed into CAD models by CADFit" loading="lazy"></div>
+        <div class="body">
+          <h3>Editable CAD from geometry</h3>
+          <p>Recovering precise, executable CAD programs (extrudes, revolves, fillets, booleans) from meshes, point clouds, and images, combining generative models with geometry-guided search.</p>
+          <div class="refs"><a href="#pub-cadfit">CADFit</a> · <a href="#pub-stepcad">StepCAD</a> · <a href="#pub-cadbench">CADBench</a></div>
+        </div>
+      </article>
+      <article class="theme reveal">
+        <div class="thumb"><img src="assets/img/pubs/videocad.jpg" alt="VideoCAD agent operating a CAD user interface" loading="lazy"></div>
+        <div class="body">
+          <h3>Agents that use design software</h3>
+          <p>Teaching AI to operate professional 3D CAD interfaces from video, learning long-horizon, precise UI interactions, and benchmarking the spatial reasoning of multimodal LLMs.</p>
+          <div class="refs"><a href="#pub-videocad">VideoCAD</a> · VideoCADFormer · VideoCAD-VQA</div>
+        </div>
+      </article>
+      <article class="theme reveal">
+        <div class="thumb"><img src="assets/img/pubs/lamp.jpg" alt="LAMP parameter-controlled car shape generation" loading="lazy"></div>
+        <div class="body">
+          <h3>Data-efficient, controllable generation</h3>
+          <p>Weight-space models that generate parameter-controlled 3D shapes and physical fields from as few as 50 examples, with safe extrapolation for design optimization and surrogate modeling.</p>
+          <div class="refs"><a href="#pub-lamp">LAMP</a> · <a href="#pub-flare">FLARE</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= NEWS ======================= -->
+<section class="block" id="news">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">NEWS</span>
+        <h2>Recent updates</h2>
+      </div>
+    </div>
+    <ul class="news" id="newsList">
+      <li><time>Aug 2026</time><div><span class="emoji">🏆</span><a href="#pub-flare">FLARE</a> won the <b>Overall Best Paper Award</b> and the <b>AI/ML Technical Committee Best Paper Award</b> at ASME IDETC-CIE 2026.</div></li>
+      <li><time>Aug 2026</time><div><span class="emoji">💼</span>Wrapped up my PhD Research Scientist internship at <b>Meta</b>, working on AI for product design (multi-agent CAD workflows and an AI-native VR design app).</div></li>
+      <li><time>Jul 2026</time><div><span class="emoji">🎓</span>Received the <b>GE Vernova Graduate Fellowship</b>.</div></li>
+      <li><time>May 2026</time><div><span class="emoji">📄</span>Two first-author papers accepted at <b>ICML 2026</b>: <a href="#pub-cadfit">CADFit</a> and <a href="#pub-lamp">LAMP</a>.</div></li>
+      <li><time>May 2026</time><div><span class="emoji">📊</span>Released <a href="#pub-cadbench">CADBench</a>, a unified benchmark for multimodal CAD program generation (18K samples, 11 models, 1.4M+ generated programs).</div></li>
+      <li><time>Apr 2026</time><div><span class="emoji">🏅</span>Received the <b>MIT Thomas Sheridan Award</b> for creativity in human–machine integration.</div></li>
+      <li><time>Nov 2025</time><div><span class="emoji">📰</span>VideoCAD featured in <a href="https://news.mit.edu/2025/new-ai-agent-learns-use-cad-create-3d-objects-sketches-1119" target="_blank" rel="noopener">MIT News</a>: “New AI agent learns to use CAD to create 3D objects from sketches.”</div></li>
+      <li><time>Sep 2025</time><div><span class="emoji">📄</span><a href="#pub-videocad">VideoCAD</a> accepted at <b>NeurIPS 2025</b> (Datasets &amp; Benchmarks Track).</div></li>
+      <li><time>Sep 2025</time><div><span class="emoji">👨‍🏫</span>Teaching Assistant for MIT <b>2.155: AI and ML for Engineering Design</b>.</div></li>
+      <li><time>Sep 2024</time><div><span class="emoji">🎉</span>Started my PhD at <b>MIT</b> as a <b>Jamieson Presidential Fellow</b>.</div></li>
+      <li><time>Jun 2024</time><div><span class="emoji">🎓</span>Graduated from <b>Stanford</b> with an MS in Mechanical Engineering (GPA 4.0).</div></li>
+      <li><time>Jun 2023</time><div><span class="emoji">💼</span>Joined <b>Google</b> as a Hardware Engineering Intern in Mountain View.</div></li>
+      <li><time>Jun 2022</time><div><span class="emoji">🎓</span>Graduated from <b>École Polytechnique</b> as class valedictorian, summa cum laude.</div></li>
+    </ul>
+    <button class="more-btn" id="newsMore">Show all news</button>
+  </div>
+</section>
+
+<!-- ======================= PUBLICATIONS ======================= -->
+<section class="block alt" id="publications">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">PUBLICATIONS</span>
+        <h2>Papers</h2>
+        <p>* denotes equal contribution. See also <a href="https://scholar.google.com/citations?user=AfQYxYMAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+      </div>
+      <div class="filters" role="tablist" aria-label="Filter publications">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="first">First author</button>
+        <button class="filter" data-filter="conference">Conference</button>
+        <button class="filter" data-filter="preprint">Preprints</button>
+      </div>
+    </div>
+
+    <div class="pubs">
+
+      <!-- CADFit -->
+      <article class="pub reveal" id="pub-cadfit" data-tags="first conference">
+        <a class="thumb" href="https://ghadinehme.github.io/cadfit.github.io/" target="_blank" rel="noopener">
+          <span class="venue-badge">ICML 2026</span>
+          <img src="assets/img/pubs/cadfit.jpg" alt="CADFit teaser" loading="lazy">
+        </a>
+        <div>
+          <h3><a href="https://ghadinehme.github.io/cadfit.github.io/" target="_blank" rel="noopener">CADFit: Precise Mesh-to-CAD Program Generation with Hybrid Optimization</a></h3>
+          <div class="authors"><span class="me">Ghadi Nehme</span>, Eamon Whalen, Faez Ahmed</div>
+          <div class="venue">International Conference on Machine Learning (ICML), 2026</div>
+          <p class="tldr">A hybrid optimization framework that recovers complex, editable CAD construction sequences (extrusions, revolutions, fillets, chamfers) from meshes by fitting and validating operations with IoU feedback. It sets the state of the art on DeepCAD, Fusion 360, and ABC, and also works end to end from photos.</p>
+          <div class="pub-links">
+            <a class="btn" href="https://arxiv.org/abs/2605.01171" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>arXiv</a>
+            <a class="btn" href="https://ghadinehme.github.io/cadfit.github.io/" target="_blank" rel="noopener"><svg><use href="#i-web"/></svg>Project</a>
+            <a class="btn" href="https://github.com/ghadinehme/CADFit" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a>
+            <a class="btn" href="https://www.youtube.com/watch?v=YBYm-moWSEs" target="_blank" rel="noopener"><svg><use href="#i-video"/></svg>Video</a>
+            <button class="btn bib-btn"><svg><use href="#i-quote"/></svg>BibTeX</button>
+          </div>
+<pre class="bibtex">@inproceedings{nehme2026cadfit,
+  title     = {CADFit: Precise Mesh-to-CAD Program Generation with Hybrid Optimization},
+  author    = {Nehme, Ghadi and Whalen, Eamon and Ahmed, Faez},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2026}
+}</pre>
+        </div>
+      </article>
+
+      <!-- LAMP -->
+      <article class="pub reveal" id="pub-lamp" data-tags="first conference">
+        <a class="thumb" href="https://ghadinehme.github.io/lamp.github.io/" target="_blank" rel="noopener">
+          <span class="venue-badge">ICML 2026</span>
+          <img src="assets/img/pubs/lamp.jpg" alt="LAMP teaser" loading="lazy">
+        </a>
+        <div>
+          <h3><a href="https://ghadinehme.github.io/lamp.github.io/" target="_blank" rel="noopener">LAMP: Data-Efficient Linear Affine Weight-Space Models for Parameter-Controlled 3D Shape Generation and Extrapolation</a></h3>
+          <div class="authors"><span class="me">Ghadi Nehme</span>, Yanxia Zhang, Dule Shu, Matthew Klenk, Faez Ahmed</div>
+          <div class="venue">International Conference on Machine Learning (ICML), 2026 · with Toyota Research Institute</div>
+          <p class="tldr">Aligns SDF decoders in a shared weight space and generates new designs by parameter-constrained affine mixing. It enables controlled interpolation from as few as 50 samples, safe extrapolation up to 100% beyond the training ranges, and performance-guided optimization on DrivAerNet++ and BlendedNet.</p>
+          <div class="pub-links">
+            <a class="btn" href="https://arxiv.org/abs/2510.22491" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>arXiv</a>
+            <a class="btn" href="https://ghadinehme.github.io/lamp.github.io/" target="_blank" rel="noopener"><svg><use href="#i-web"/></svg>Project</a>
+            <a class="btn" href="https://github.com/ghadinehme/LAMP" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a>
+            <a class="btn" href="https://www.youtube.com/watch?v=DiuyUY8uyp4" target="_blank" rel="noopener"><svg><use href="#i-video"/></svg>Video</a>
+            <button class="btn bib-btn"><svg><use href="#i-quote"/></svg>BibTeX</button>
+          </div>
+<pre class="bibtex">@inproceedings{nehme2026lamp,
+  title     = {LAMP: Data-Efficient Linear Affine Weight-Space Models for Parameter-Controlled 3D Shape Generation and Extrapolation},
+  author    = {Nehme, Ghadi and Zhang, Yanxia and Shu, Dule and Klenk, Matthew and Ahmed, Faez},
+  booktitle = {International Conference on Machine Learning (ICML)},
+  year      = {2026}
+}</pre>
+        </div>
+      </article>
+
+      <!-- FLARE -->
+      <article class="pub reveal" id="pub-flare" data-tags="conference">
+        <a class="thumb" href="https://arxiv.org/abs/2604.16649" target="_blank" rel="noopener">
+          <span class="venue-badge">IDETC 2026</span>
+          <img src="assets/img/pubs/flare.jpg" alt="FLARE displacement field predictions" loading="lazy">
+        </a>
+        <div>
+          <h3><a href="https://arxiv.org/abs/2604.16649" target="_blank" rel="noopener">FLARE: A Data-Efficient Surrogate for Predicting Displacement Fields in Directed Energy Deposition</a></h3>
+          <div class="authors">Kittipong Thiamchaiboonthawee, <span class="me">Ghadi Nehme</span>, Ram Mohan Telikicherla, Jiawei Tian, Balaji Jayaraman, Vikas Chandan, Dhanushkodi Mariappan, Faez Ahmed</div>
+          <div class="venue">ASME IDETC-CIE, 2026 · with GE Vernova Advanced Research</div>
+          <div class="badges">
+            <span class="badge prize"><svg width="13" height="13"><use href="#i-trophy"/></svg>Overall Best Paper Award</span>
+            <span class="badge prize"><svg width="13" height="13"><use href="#i-trophy"/></svg>AI/ML Track Best Paper Award</span>
+          </div>
+          <p class="tldr">Encodes additive-manufacturing simulations as implicit neural fields whose weights follow the affine structure of the process parameters, predicting post-cooling distortion for unseen geometries, laser powers, and speeds.</p>
+          <div class="pub-links">
+            <a class="btn" href="https://arxiv.org/abs/2604.16649" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>arXiv</a>
+            <button class="btn bib-btn"><svg><use href="#i-quote"/></svg>BibTeX</button>
+          </div>
+<pre class="bibtex">@inproceedings{thiamchaiboonthawee2026flare,
+  title     = {FLARE: A Data-Efficient Surrogate for Predicting Displacement Fields in Directed Energy Deposition},
+  author    = {Thiamchaiboonthawee, Kittipong and Nehme, Ghadi and Telikicherla, Ram Mohan and Tian, Jiawei and Jayaraman, Balaji and Chandan, Vikas and Mariappan, Dhanushkodi and Ahmed, Faez},
+  booktitle = {ASME International Design Engineering Technical Conferences and Computers and Information in Engineering Conference (IDETC-CIE)},
+  year      = {2026}
+}</pre>
+        </div>
+      </article>
+
+      <!-- VideoCAD -->
+      <article class="pub reveal" id="pub-videocad" data-tags="first conference">
+        <a class="thumb" href="https://ghadinehme.github.io/videocad.github.io/" target="_blank" rel="noopener">
+          <span class="venue-badge">NeurIPS 2025</span>
+          <img src="assets/img/pubs/videocad.jpg" data-hover="assets/img/pubs/videocad-demo.gif" alt="VideoCAD overview" loading="lazy">
+        </a>
+        <div>
+          <h3><a href="https://ghadinehme.github.io/videocad.github.io/" target="_blank" rel="noopener">VideoCAD: A Dataset and Model for Learning Long-Horizon 3D CAD UI Interactions from Video</a></h3>
+          <div class="authors">Brandon Man<sup>*</sup>, <span class="me">Ghadi Nehme</span><sup>*</sup>, Md Ferdous Alam, Faez Ahmed</div>
+          <div class="venue">Conference on Neural Information Processing Systems (NeurIPS), Datasets &amp; Benchmarks Track, 2025</div>
+          <div class="badges">
+            <a class="badge press" href="https://news.mit.edu/2025/new-ai-agent-learns-use-cad-create-3d-objects-sketches-1119" target="_blank" rel="noopener"><svg width="13" height="13"><use href="#i-news"/></svg>Featured in MIT News</a>
+            <span class="badge conf"><svg width="13" height="13"><use href="#i-star"/></svg>220+ GitHub stars</span>
+          </div>
+          <p class="tldr">The first large-scale dataset for UI interaction in precision engineering software: 41K+ annotated videos of CAD operations with time horizons up to 20× longer than existing UI datasets. It also introduces VideoCADFormer, a model that learns CAD interactions from video, and a VQA benchmark for 3D spatial reasoning in multimodal LLMs.</p>
+          <div class="pub-links">
+            <a class="btn" href="https://arxiv.org/abs/2505.24838" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>arXiv</a>
+            <a class="btn" href="https://ghadinehme.github.io/videocad.github.io/" target="_blank" rel="noopener"><svg><use href="#i-web"/></svg>Project</a>
+            <a class="btn" href="https://github.com/ghadinehme/VideoCAD" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a>
+            <a class="btn" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/WX8PCK" target="_blank" rel="noopener"><svg><use href="#i-data"/></svg>Dataset</a>
+            <a class="btn" href="https://news.mit.edu/2025/new-ai-agent-learns-use-cad-create-3d-objects-sketches-1119" target="_blank" rel="noopener"><svg><use href="#i-news"/></svg>Press</a>
+            <button class="btn bib-btn"><svg><use href="#i-quote"/></svg>BibTeX</button>
+          </div>
+<pre class="bibtex">@inproceedings{man2025videocad,
+  title     = {VideoCAD: A Dataset and Model for Learning Long-Horizon 3D CAD UI Interactions from Video},
+  author    = {Man, Brandon and Nehme, Ghadi and Alam, Md Ferdous and Ahmed, Faez},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS), Datasets and Benchmarks Track},
+  year      = {2025}
+}</pre>
+        </div>
+      </article>
+
+      <!-- CADBench -->
+      <article class="pub reveal" id="pub-cadbench" data-tags="preprint">
+        <a class="thumb" href="https://arxiv.org/abs/2605.10873" target="_blank" rel="noopener">
+          <span class="venue-badge">arXiv 2026</span>
+          <img src="assets/img/pubs/cadbench.jpg" alt="CADBench benchmark families" loading="lazy">
+        </a>
+        <div>
+          <h3><a href="https://arxiv.org/abs/2605.10873" target="_blank" rel="noopener">CADBench: A Multimodal Benchmark for AI-Assisted CAD Program Generation</a></h3>
+          <div class="authors">Anna C. Doris, Jacob Thomas Sony, <span class="me">Ghadi Nehme</span>, Era Syla, Amin Heyrani Nobari, Faez Ahmed</div>
+          <div class="venue">arXiv preprint, 2026</div>
+          <p class="tldr">A unified benchmark of 18,000 samples across six families (DeepCAD, Fusion 360, ABC, MCB, Objaverse) and five input modalities. It evaluates eleven CAD-specialized and general-purpose VLMs over 1.4M+ generated CAD programs and identifies recurring failure modes.</p>
+          <div class="pub-links">
+            <a class="btn" href="https://arxiv.org/abs/2605.10873" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>arXiv</a>
+            <a class="btn" href="https://github.com/anniedoris/CADBench" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Benchmark</a>
+            <button class="btn bib-btn"><svg><use href="#i-quote"/></svg>BibTeX</button>
+          </div>
+<pre class="bibtex">@article{doris2026cadbench,
+  title   = {CADBench: A Multimodal Benchmark for AI-Assisted CAD Program Generation},
+  author  = {Doris, Anna C. and Sony, Jacob Thomas and Nehme, Ghadi and Syla, Era and Nobari, Amin Heyrani and Ahmed, Faez},
+  journal = {arXiv preprint arXiv:2605.10873},
+  year    = {2026}
+}</pre>
+        </div>
+      </article>
+
+      <!-- StepCAD (under review) -->
+      <article class="pub reveal" id="pub-stepcad" data-tags="first preprint">
+        <div class="thumb">
+          <span class="venue-badge">Under review</span>
+          <img src="assets/img/pubs/stepcad.jpg" alt="Samples from the ARCADE-1.5M dataset" loading="lazy">
+        </div>
+        <div>
+          <h3>StepCAD: Mesh-to-CAD Code Generation via LLM Policy and Geometry-Guided Search</h3>
+          <div class="authors"><span class="me">Ghadi Nehme</span>, et al.</div>
+          <div class="venue">Under review, 2026</div>
+          <div class="badges"><span class="badge review">Paper &amp; code coming soon</span></div>
+          <p class="tldr">A state-conditioned LLM policy proposes CAD programs step by step, and an IoU-guided tree search refines them. Trained on ARCADE-1.5M, a new dataset of 1.5M executable CAD programs with sequences of 150+ steps, StepCAD improves IoU by up to 87.2% over the best prior method.</p>
+        </div>
+      </article>
+
+      <!-- Meta-World RL -->
+      <article class="pub reveal" id="pub-metaworld" data-tags="first preprint">
+        <a class="thumb" href="https://arxiv.org/abs/2311.12854" target="_blank" rel="noopener">
+          <span class="venue-badge">arXiv 2023</span>
+          <img src="assets/img/projects/metaworld.jpg" alt="MT-QWALE architecture" loading="lazy">
+        </a>
+        <div>
+          <h3><a href="https://arxiv.org/abs/2311.12854" target="_blank" rel="noopener">Enhancing Robotic Manipulation: Harnessing the Power of Multi-Task Reinforcement Learning and Single Life Reinforcement Learning in Meta-World</a></h3>
+          <div class="authors"><span class="me">Ghadi Nehme</span>, Ishan Sabane, Tejas Y. Deo</div>
+          <div class="venue">arXiv preprint, 2023 · Stanford University</div>
+          <p class="tldr">MT-QWALE lets a robot arm complete Meta-World tasks in a single trial under distribution shift. It reaches near-100% success with randomized object positions and outperforms MT-SAC.</p>
+          <div class="pub-links">
+            <a class="btn" href="https://arxiv.org/abs/2311.12854" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>arXiv</a>
+            <a class="btn" href="https://github.com/ghadinehme/Enhancing-Robotic-Manipulaiton-Harnessing-the-power-of-Multitask-RL-and-Single-RL-in-Metaworld" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a>
+            <button class="btn bib-btn"><svg><use href="#i-quote"/></svg>BibTeX</button>
+          </div>
+<pre class="bibtex">@article{nehme2023enhancing,
+  title   = {Enhancing Robotic Manipulation: Harnessing the Power of Multi-Task Reinforcement Learning and Single Life Reinforcement Learning in Meta-World},
+  author  = {Nehme, Ghadi and Sabane, Ishan and Deo, Tejas Y.},
+  journal = {arXiv preprint arXiv:2311.12854},
+  year    = {2023}
+}</pre>
+        </div>
+      </article>
+
+      <!-- CARLA -->
+      <article class="pub reveal" id="pub-carla" data-tags="first preprint">
+        <a class="thumb" href="https://arxiv.org/abs/2311.10735" target="_blank" rel="noopener">
+          <span class="venue-badge">arXiv 2023</span>
+          <img src="assets/img/projects/carla.jpg" alt="Safe navigation DQN architecture" loading="lazy">
+        </a>
+        <div>
+          <h3><a href="https://arxiv.org/abs/2311.10735" target="_blank" rel="noopener">Safe Navigation: Training Autonomous Vehicles using Deep Reinforcement Learning in CARLA</a></h3>
+          <div class="authors"><span class="me">Ghadi Nehme</span>, Tejas Y. Deo</div>
+          <div class="venue">arXiv preprint, 2023 · Stanford University</div>
+          <p class="tldr">DQN agents that use segmentation and depth preprocessing to drive urban scenarios safely in the CARLA simulator, reaching a 94% success rate on unseen test trajectories.</p>
+          <div class="pub-links">
+            <a class="btn" href="https://arxiv.org/abs/2311.10735" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>arXiv</a>
+            <a class="btn" href="https://github.com/ghadinehme/Safe-Navigation-Training-Autonomous-Vehicles-using-Deep-Reinforcement-Learning-in-CARLA" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a>
+            <button class="btn bib-btn"><svg><use href="#i-quote"/></svg>BibTeX</button>
+          </div>
+<pre class="bibtex">@article{nehme2023safe,
+  title   = {Safe Navigation: Training Autonomous Vehicles using Deep Reinforcement Learning in CARLA},
+  author  = {Nehme, Ghadi and Deo, Tejas Y.},
+  journal = {arXiv preprint arXiv:2311.10735},
+  year    = {2023}
+}</pre>
+        </div>
+      </article>
+
+      <!-- Bachelor thesis -->
+      <article class="pub reveal" id="pub-thesis" data-tags="first">
+        <a class="thumb" href="assets/reports/bachelor-thesis-tango-black-report.pdf" target="_blank" rel="noopener">
+          <span class="venue-badge">Thesis 2022</span>
+          <img src="assets/img/projects/tango.jpg" alt="Tensile testing setup for Tango Black" loading="lazy" style="object-fit:cover">
+        </a>
+        <div>
+          <h3><a href="assets/reports/bachelor-thesis-tango-black-report.pdf" target="_blank" rel="noopener">Time-Dependent Characterization and Constitutive Modeling of 3D-Printed Polymers</a></h3>
+          <div class="authors"><span class="me">Ghadi Nehme</span> · Advisor: Prof. Kostas Danas</div>
+          <div class="venue">Bachelor Thesis, Solid Mechanics Laboratory (LMS), École Polytechnique / CNRS, 2022</div>
+          <p class="tldr">Experimental characterization of the 3D-printed elastomer Tango Black under uniaxial tension, cyclic loading, and relaxation, measured with digital image correlation and fitted with a hyperelastic–viscoelastic constitutive model.</p>
+          <div class="pub-links">
+            <a class="btn" href="assets/reports/bachelor-thesis-tango-black-report.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>Thesis</a>
+            <a class="btn" href="assets/reports/bachelor-thesis-tango-black-defense.pdf" target="_blank" rel="noopener"><svg><use href="#i-file"/></svg>Defense slides</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================= PROJECTS ======================= -->
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">PROJECTS</span>
+        <h2>Research &amp; course projects</h2>
+        <p>Robotics, machine learning, and engineering projects from MIT, Stanford, and École Polytechnique.</p>
+      </div>
+    </div>
+    <div class="projects">
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/sketch2cad.jpg" alt="Sketch-to-CAD command sequence" loading="lazy"><span class="when">MIT · 2024</span></div>
+        <div class="body">
+          <h3>Sketch-to-CAD: CAD Models from Hand-Drawn Sketches</h3>
+          <div class="org">MIT · Computer Vision</div>
+          <p>Built a dataset of 166K hand-drawn sketches paired with DeepCAD models, and a CNN encoder with a Transformer decoder that predicts parametric CAD sequences (91% command accuracy).</p>
+          <div class="tags"><span class="tag">Transformers</span><span class="tag">CAD</span><span class="tag">Dataset</span></div>
+          <div class="pub-links"><a class="btn" href="assets/reports/sketch-to-cad-report.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>Report</a></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/llm-robot.jpg" alt="Robot arm in simulated kitchen" loading="lazy"><span class="when">MIT · 2024</span></div>
+        <div class="body">
+          <h3>LLM-Driven Adaptive Robotic Manipulation</h3>
+          <div class="org">MIT · Robotics</div>
+          <p>LLM and VLM-based high-level task planning for a robot arm in a simulated kitchen: stacking, sorting, and table setup with affordance-based actions and antipodal grasping.</p>
+          <div class="tags"><span class="tag">LLMs</span><span class="tag">VLMs</span><span class="tag">Manipulation</span></div>
+          <div class="pub-links"><a class="btn" href="assets/reports/llm-robotic-manipulation.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>Report</a></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/robot-design.jpg" alt="Robot workspace optimization" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">Stanford · 2024</span></div>
+        <div class="body">
+          <h3>Multi-Objective Optimization Framework for Robot Design</h3>
+          <div class="org">Stanford · Robot Design</div>
+          <p>Combined genetic algorithms and gradient descent to optimize robot kinematics for manipulability, precision, and safety in surgical and dental applications.</p>
+          <div class="tags"><span class="tag">Optimization</span><span class="tag">Medical Robotics</span></div>
+          <div class="pub-links">
+            <a class="btn" href="assets/reports/multi-objective-robot-design.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>Report</a>
+            <a class="btn" href="https://github.com/ghadinehme/robot-design-optimization" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/neural-decoding.jpg" alt="Neural spike decoding pipeline" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">Stanford · 2023</span></div>
+        <div class="body">
+          <h3>Real-Time Decoding of Decisions from Neural Spikes</h3>
+          <div class="org">Stanford School of Medicine · Haroush Lab</div>
+          <p>Decoded a monkey's choices in an iterated Battle of the Sexes game from neural spiking activity in real time, reaching up to 90% decoding accuracy.</p>
+          <div class="tags"><span class="tag">Neuroscience</span><span class="tag">ML</span></div>
+          <div class="pub-links"><a class="btn" href="assets/reports/monkey-neural-decoding.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>Report</a></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/mrl.jpg" alt="Predicted vs observed mean ribosome load" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">Stanford · 2023</span></div>
+        <div class="body">
+          <h3>Predicting Mean Ribosome Load of 5′UTRs with Transformers</h3>
+          <div class="org">Stanford · with Marie Huynh</div>
+          <p>Transformer models that predict translation efficiency from mRNA 5′UTR sequences, motivated by mRNA therapeutics (best R² = 0.95).</p>
+          <div class="tags"><span class="tag">Transformers</span><span class="tag">Genomics</span></div>
+          <div class="pub-links"><a class="btn" href="assets/reports/mrl-5utr-prediction.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>Report</a></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/otoo.jpg" alt="OTOO smart pharmacy prototype" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">Stanford · 2022–23</span></div>
+        <div class="body">
+          <h3>OTOO: Smart Single-Dose Pharmacy</h3>
+          <div class="org">Stanford ME310 · Johnson &amp; Johnson</div>
+          <p>A year-long, five-person global design project with J&amp;J and ZHAW: a smart pharmacy that dispenses single-packaged pills from UI orders to reduce expired medication.</p>
+          <div class="tags"><span class="tag">Design Thinking</span><span class="tag">Raspberry Pi</span><span class="tag">Prototyping</span></div>
+          <div class="pub-links">
+            <a class="btn" href="https://331aebcf-af3d-4b35-aba9-01fb582b88d0.filesusr.com/ugd/94a678_f63556b77d514da89385626180ae8cba.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>Report</a>
+            <a class="btn" href="https://github.com/ghadinehme/OTOO-smart-pharmacy" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/organ-chip.jpg" alt="Organ-on-a-chip actuator" loading="lazy"><span class="when">CNRS · 2022</span></div>
+        <div class="body">
+          <h3>Robot for an Organ-on-a-Chip Platform</h3>
+          <div class="org">Laboratory of Optics and Biosciences, CNRS</div>
+          <p>Designed, 3D-printed, and built an Arduino-controlled actuator with a touchscreen and servos that renews cell-culture media every 3 hours, validated with fluid-mechanics calculations.</p>
+          <div class="tags"><span class="tag">Mechatronics</span><span class="tag">Arduino</span><span class="tag">3D Printing</span></div>
+          <div class="pub-links">
+            <a class="btn" href="assets/reports/organ-on-chip-robot.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>Report</a>
+            <a class="btn" href="https://github.com/ghadinehme/Robot-for-an-Organ-on-a-chip-Platform" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/gravity.jpg" alt="Balloon trajectories over Antarctica" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">CNRS · 2021</span></div>
+        <div class="body">
+          <h3>Atmospheric Gravity Waves over Antarctica</h3>
+          <div class="org">Dynamic Meteorology Lab (LMD-IPSL), CNRS</div>
+          <p>Compared real stratospheric balloon observations with virtual balloons in simulations to characterize a large-amplitude orographic gravity wave over the Antarctic Peninsula.</p>
+          <div class="tags"><span class="tag">Data Science</span><span class="tag">Python</span><span class="tag">Atmospheric Physics</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb">
+          <div class="ph"><svg><use href="#i-gear"/></svg></div>
+          <span class="when">Open source</span>
+        </div>
+        <div class="body">
+          <h3>CADStudio</h3>
+          <div class="org">Personal · Web</div>
+          <p>An AI-native parametric CAD environment that runs in the browser.</p>
+          <div class="tags"><span class="tag">JavaScript</span><span class="tag">CAD</span><span class="tag">AI Agents</span></div>
+          <div class="pub-links"><a class="btn" href="https://github.com/ghadinehme/CADStudio" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a></div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="sec-head" style="margin-top:56px">
+      <div>
+        <span class="sec-num">BUILD</span>
+        <h2>Things I've built</h2>
+        <p>Hardware, robots, and software I built for courses and for fun.</p>
+      </div>
+    </div>
+    <div class="projects">
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/svagbot.jpg" alt="SVAG-bot mechatronics robot" loading="lazy"><span class="when">Stanford ME210</span></div>
+        <div class="body">
+          <h3>SVAG-bot</h3>
+          <div class="org">Stanford · Mechatronics</div>
+          <p>An autonomous mechatronic robot designed, built, and programmed in Stanford's ME210 mechatronics course.</p>
+          <div class="tags"><span class="tag">Mechatronics</span><span class="tag">Embedded</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/cnc.jpg" alt="CNC milling machine CAD" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">U of T · 2021</span></div>
+        <div class="body">
+          <h3>4-Axis CNC Milling Machine</h3>
+          <div class="org">University of Toronto · MIE243</div>
+          <p>Full mechanical design of a desktop 4-axis CNC mill, from concept selection to detailed CAD, technical drawings, and bill of materials.</p>
+          <div class="tags"><span class="tag">SolidWorks</span><span class="tag">Machine Design</span></div>
+          <div class="pub-links"><a class="btn" href="assets/reports/cnc-milling-bill-of-materials.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>BOM</a></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/mathsolver.jpg" alt="Handwritten math solver UI" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">Polytechnique</span></div>
+        <div class="body">
+          <h3>MathsSolver</h3>
+          <div class="org">École Polytechnique · CSE201</div>
+          <p>A C++ application that solves handwritten and typed equations and systems step by step. I led the numerical-methods team.</p>
+          <div class="tags"><span class="tag">C++</span><span class="tag">OOP</span></div>
+          <div class="pub-links"><a class="btn" href="https://github.com/lucienwalewski/MathsSolver" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/autocar.jpg" alt="Autonomous delivery car AutoV105" loading="lazy"><span class="when">2018</span></div>
+        <div class="body">
+          <h3>AutoV105: Self-Driving Delivery Car</h3>
+          <div class="org">High school · 1st prize, USJ Science Fair</div>
+          <p>An autonomous delivery vehicle designed and built from scratch. It won first prize at the Science Fair organized by Université Saint-Joseph.</p>
+          <div class="tags"><span class="tag">Autonomy</span><span class="tag">Arduino</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/rc-plane.jpg" alt="RC airplane AERO P207" loading="lazy"><span class="when">Personal</span></div>
+        <div class="body">
+          <h3>AERO P207: RC Airplane</h3>
+          <div class="org">Personal project</div>
+          <p>A radio-controlled airplane designed and built by hand.</p>
+          <div class="tags"><span class="tag">Aerodynamics</span><span class="tag">Fabrication</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/rocket.jpg" alt="Thrust-vector-controlled rocket CAD" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">Personal</span></div>
+        <div class="body">
+          <h3>ROCK M10: Thrust-Vector-Controlled Rocket</h3>
+          <div class="org">Personal project</div>
+          <p>CAD design of a model rocket with thrust vector control.</p>
+          <div class="tags"><span class="tag">CAD</span><span class="tag">Controls</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================= EXPERIENCE ======================= -->
+<section class="block alt" id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">EXPERIENCE</span>
+        <h2>Research &amp; industry</h2>
+      </div>
+    </div>
+    <div class="timeline">
+
+      <div class="job reveal">
+        <div class="dot" style="background:#0866ff">Meta</div>
+        <div class="card">
+          <div class="top"><h3>PhD Research Scientist Intern, AI for Product Design</h3><span class="date">May – Aug 2026</span></div>
+          <div class="org">Meta · Sunnyvale, CA</div>
+          <ul>
+            <li>Built a multi-agent AI system that automates mechanical engineering workflows: CAD drawing inspection, parametric model generation, 2D drawing automation, and FEA surrogate modeling.</li>
+            <li>Developed an AI-native VR design app where engineers use voice and hand gestures to generate 3D geometry, run FE simulations, and navigate real product assemblies.</li>
+            <li>Trained ML surrogate models for fast forward and inverse display design, enabling real-time performance prediction and optimization.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="dot" style="background:#a31f34">MIT</div>
+        <div class="card">
+          <div class="top"><h3>Graduate Research Assistant</h3><span class="date">Sep 2024 – Present</span></div>
+          <div class="org">MIT DeCoDe Lab (2025–) &amp; MIT CSAIL (2024) · Advisor: Prof. Faez Ahmed</div>
+          <ul>
+            <li>Research on AI for multimodal CAD generation: large-scale datasets and models for parametric design generation, UI action learning, and precision-controlled optimization.</li>
+            <li>Collaborations with Toyota Research Institute, Siemens, and GE Vernova.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="dot" style="background:#8c1515">SU</div>
+        <div class="card">
+          <div class="top"><h3>Graduate Research Assistant, CHARM Lab</h3><span class="date">Sep 2023 – Apr 2024</span></div>
+          <div class="org">Stanford University · Collaborative Haptics and Robotics in Medicine</div>
+          <ul>
+            <li>Designed the system and control of a neurosurgery robot combining an endoscope, an exoscope, and robotic arms.</li>
+            <li>Trained the da Vinci surgical robot to autonomously retract tissues of varying stiffness.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="dot" style="background:#3d424d">DV</div>
+        <div class="card">
+          <div class="top"><h3>Co-Founder &amp; CTO</h3><span class="date">Oct 2023 – Jun 2024</span></div>
+          <div class="org">DaVinci · AI startup for automating CAD</div>
+          <ul><li>Built an AI model that converts 2D sketches to CAD, streamlining the design process.</li></ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="dot" style="background:#1a73e8">G</div>
+        <div class="card">
+          <div class="top"><h3>Hardware Engineering Intern</h3><span class="date">Jun – Sep 2023</span></div>
+          <div class="org">Google · Mountain View, CA</div>
+          <ul>
+            <li>Ran a competitive reliability benchmarking study of tablets, including hands-on reliability testing and failure analysis.</li>
+            <li>Wrote actionable design guidelines (water-ingress resistance, battery-to-carrier clearance) and analyzed how system-integration features correlate with robustness.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="dot" style="background:#8c1515">SU</div>
+        <div class="card">
+          <div class="top"><h3>Graduate Research Assistant</h3><span class="date">Jan – Jun 2023</span></div>
+          <div class="org">Stanford School of Medicine · Supervisor: Dr. Keren Haroush</div>
+          <ul><li>Built real-time decoding of a monkey's decisions in an iterated Battle of the Sexes game from neural spikes, reaching 90% accuracy.</li></ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="dot" style="background:#c8102e">J&amp;J</div>
+        <div class="card">
+          <div class="top"><h3>Design Research Engineer, ME310</h3><span class="date">Sep 2022 – Jun 2023</span></div>
+          <div class="org">Stanford × Johnson &amp; Johnson · Supervisors: Dr. Mark Cutkosky, Dr. George Toye</div>
+          <ul><li>Designed and built a smart pharmacy that dispenses single-packaged pills from UI orders (Raspberry Pi), through need-finding, benchmarking, and rapid iterative prototyping.</li></ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="dot" style="background:#0b3d91">CNRS</div>
+        <div class="card">
+          <div class="top"><h3>Robotics Research Intern</h3><span class="date">Apr – Jun 2022</span></div>
+          <div class="org">Laboratory of Optics and Biosciences (LOB), CNRS · Palaiseau, France</div>
+          <ul><li>Developed an Arduino-controlled, 3D-printed actuator for an organ-on-a-chip platform that renews cell-culture media automatically.</li></ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="dot" style="background:#0b3d91">CNRS</div>
+        <div class="card">
+          <div class="top"><h3>Research Engineer Intern (Bachelor Thesis)</h3><span class="date">Jan – Mar 2022</span></div>
+          <div class="org">Solid Mechanics Laboratory (LMS), CNRS · Supervisor: Prof. Kostas Danas</div>
+          <ul><li>Characterized a 3D-printed polymer using a SolidWorks-designed setup, a hydraulic press, and DIC, then fitted a hyperelastic elastomer model.</li></ul>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="dot" style="background:#0b3d91">CNRS</div>
+        <div class="card">
+          <div class="top"><h3>Research Data Scientist Intern</h3><span class="date">Jun – Aug 2021</span></div>
+          <div class="org">Dynamic Meteorology Laboratory (LMD-IPSL), CNRS · Supervisor: Dr. Riwal Plougonven</div>
+          <ul><li>Analyzed gravity waves from 13 stratospheric balloons that flew over Antarctica for months, and built a metric that matches virtual balloon trajectories to real ones.</li></ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Education -->
+    <div class="sec-head" style="margin-top:56px">
+      <div>
+        <span class="sec-num">EDUCATION</span>
+        <h2>Education</h2>
+      </div>
+    </div>
+    <div class="edu">
+      <div class="school reveal" style="--c:#a31f34">
+        <div class="yrs">Sep 2024 – Present</div>
+        <h3>MIT</h3>
+        <div class="deg">PhD, AI for Engineering Design</div>
+        <ul>
+          <li>GPA 5.0 / 5.0</li>
+          <li>Jamieson Presidential Fellowship</li>
+          <li>Advisor: Prof. Faez Ahmed</li>
+        </ul>
+      </div>
+      <div class="school reveal" style="--c:#8c1515">
+        <div class="yrs">Sep 2022 – Jun 2024</div>
+        <h3>Stanford University</h3>
+        <div class="deg">MS, Mechanical Engineering</div>
+        <ul>
+          <li>GPA 4.0 / 4.0</li>
+          <li>Robotics, Design &amp; AI</li>
+          <li>ML, Computer Vision, Decision Making under Uncertainty, Robot Autonomy</li>
+        </ul>
+      </div>
+      <div class="school reveal" style="--c:#0b3d91">
+        <div class="yrs">Sep 2019 – Jun 2022</div>
+        <h3>École Polytechnique</h3>
+        <div class="deg">BS, Mathematics &amp; Physics</div>
+        <ul>
+          <li>GPA 4.22 / 4.0 · Class Valedictorian, Summa Cum Laude</li>
+          <li>Minor in Biology</li>
+          <li>President of the Robotics, Math, and Arts clubs</li>
+        </ul>
+      </div>
+    </div>
+    <div class="edu-extra">
+      <div class="school reveal" style="--c:#002a5c">
+        <div class="yrs">Sep – Dec 2021</div>
+        <h3>University of Toronto</h3>
+        <div class="deg">Exchange Semester, Engineering · GPA 4.0 / 4.0</div>
+      </div>
+      <div class="school reveal" style="--c:#6b7280">
+        <div class="yrs">Jul 2021</div>
+        <h3>CentraleSupélec</h3>
+        <div class="deg">Summer School, Introduction to Artificial Intelligence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= AWARDS ======================= -->
+<section class="block" id="awards">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">HONORS</span>
+        <h2>Awards &amp; fellowships</h2>
+      </div>
+    </div>
+    <div class="awards">
+      <div class="award major reveal"><div class="ico"><svg><use href="#i-trophy"/></svg></div><div><span class="yr">2026</span><h3>Overall Best Paper Award &amp; AI/ML Track Best Paper Award</h3><p>ASME IDETC-CIE 2026, for FLARE</p></div></div>
+      <div class="award major reveal"><div class="ico"><svg><use href="#i-cap"/></svg></div><div><span class="yr">2026</span><h3>GE Vernova Graduate Fellowship</h3><p>MIT</p></div></div>
+      <div class="award major reveal"><div class="ico"><svg><use href="#i-medal"/></svg></div><div><span class="yr">2026</span><h3>MIT Thomas Sheridan Award</h3><p>For creativity in human–machine integration, MIT Mechanical Engineering</p></div></div>
+      <div class="award major reveal"><div class="ico"><svg><use href="#i-cap"/></svg></div><div><span class="yr">2024</span><h3>Jamieson Presidential Fellowship</h3><p>MIT</p></div></div>
+      <div class="award reveal"><div class="ico"><svg><use href="#i-star"/></svg></div><div><span class="yr">2022</span><h3>Class Valedictorian, Summa Cum Laude</h3><p>Bachelor Program, École Polytechnique</p></div></div>
+      <div class="award reveal"><div class="ico"><svg><use href="#i-star"/></svg></div><div><span class="yr">2019–2022</span><h3>Outstanding Student Distinction</h3><p>École Polytechnique, for dedication to the school community and to the welfare of society</p></div></div>
+      <div class="award reveal"><div class="ico"><svg><use href="#i-medal"/></svg></div><div><span class="yr">2021</span><h3>Bronze Medal, International Mathematics Competition (IMC)</h3><p>University students' mathematics olympiad</p></div></div>
+      <div class="award reveal"><div class="ico"><svg><use href="#i-cap"/></svg></div><div><span class="yr">2020</span><h3>Excellence Scholarship</h3><p>École Polytechnique Foundation</p></div></div>
+      <div class="award reveal"><div class="ico"><svg><use href="#i-cap"/></svg></div><div><span class="yr">2019</span><h3>Excellence-Major Scholarship</h3><p>French Government (AEFE), highly selective</p></div></div>
+      <div class="award reveal"><div class="ico"><svg><use href="#i-trophy"/></svg></div><div><span class="yr">2018</span><h3>First Prize, USJ Science Fair</h3><p>For building an autonomous delivery car</p></div></div>
+      <div class="award reveal"><div class="ico"><svg><use href="#i-medal"/></svg></div><div><span class="yr">2017–2018</span><h3>Math &amp; Informatics Competitions</h3><p>1st prize, Mathématiques sans Frontières · 2nd prize, Course aux Nombres · 3rd prize, Castor Informatique</p></div></div>
+      <div class="award reveal"><div class="ico"><svg><use href="#i-gear"/></svg></div><div><span class="yr">Certification</span><h3>Certified SolidWorks Associate (CSWA)</h3><p>Dassault Systèmes</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= TEACHING / LEADERSHIP / SKILLS ======================= -->
+<section class="block alt" id="teaching">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="sec-num">TEACHING &amp; SERVICE</span>
+        <h2>Teaching, leadership &amp; skills</h2>
+      </div>
+    </div>
+
+    <h4 class="subhead">Teaching</h4>
+    <div class="two-col">
+      <div class="mini reveal">
+        <div class="date">Fall 2025</div>
+        <h3>2.155: AI and ML for Engineering Design</h3>
+        <div class="org">Teaching Assistant · MIT</div>
+        <p>Held weekly office hours and mentored 80+ students on their final projects.</p>
+      </div>
+      <div class="mini reveal">
+        <div class="date">2023 – 2024</div>
+        <h3>MATH 104: Applied Matrix Theory</h3>
+        <div class="org">Teaching Assistant · Stanford University</div>
+        <p>Ran weekly office hours and review sessions for 100+ students.</p>
+      </div>
+    </div>
+
+    <h4 class="subhead" style="margin-top:32px">Leadership &amp; volunteering</h4>
+    <div class="two-col">
+      <div class="mini reveal">
+        <div class="date">2020 – 2021</div>
+        <h3>General Secretary, L'ORE</h3>
+        <div class="org">Student Government of the Bachelor Program, École Polytechnique</div>
+        <p>Led a team of nine, organized monthly social events, and raised funds for a water fountain in Laos with Safe Water Cube.</p>
+      </div>
+      <div class="mini reveal">
+        <div class="date">2019 – 2022</div>
+        <h3>President, Robotics Club</h3>
+        <div class="org">École Polytechnique Bachelor Program</div>
+        <p>Led the Robotics Club, and also served as president of the Mathematics and Arts clubs.</p>
+      </div>
+      <div class="mini reveal">
+        <div class="date">2017 – 2022</div>
+        <h3>Team Leader, SSCC Missionary Group</h3>
+        <div class="org">Lebanon</div>
+        <p>Organized activities for children and elderly people in need, and helped people affected by the August 4th explosion in Beirut.</p>
+      </div>
+      <div class="mini reveal">
+        <div class="date">Beyond research</div>
+        <h3>Hobbies</h3>
+        <div class="org">Art, music &amp; sports</div>
+        <p>Drawing, painting, playing the piano, soccer, tennis, squash, pickleball, and prototyping. Languages: French, English, Arabic, and some Japanese.</p>
+      </div>
+    </div>
+
+    <h4 class="subhead" style="margin-top:32px">Skills</h4>
+    <div class="mini reveal">
+      <dl class="skills">
+        <dt>ML &amp; Code</dt>
+        <dd><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">C++</span><span class="tag">Julia</span><span class="tag">MATLAB</span><span class="tag">Git</span></dd>
+        <dt>CAD &amp; Sim</dt>
+        <dd><span class="tag">SolidWorks (CSWA)</span><span class="tag">Fusion 360</span><span class="tag">Onshape</span><span class="tag">CadQuery</span><span class="tag">MuJoCo</span><span class="tag">ROS</span></dd>
+        <dt>Hardware</dt>
+        <dd><span class="tag">Arduino</span><span class="tag">Raspberry Pi</span><span class="tag">3D Printing</span><span class="tag">Prototyping</span><span class="tag">Hand Drafting</span></dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= CONTACT ======================= -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="contact reveal">
+      <div style="position:relative">
+        <span class="sec-num" style="color:#ff8a9a">CONTACT</span>
+        <h2>Let's talk</h2>
+        <p>I'm always happy to talk about AI-assisted design, generative modeling for engineering, and intelligent interfaces, whether for research collaborations, internships, or speaking.</p>
+        <a class="email" href="mailto:ghadi@mit.edu">ghadi@mit.edu</a>
+        <p style="margin-top:14px;font-size:.9rem">MIT Department of Mechanical Engineering · Cambridge, MA</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:ghadi@mit.edu"><svg><use href="#i-mail"/></svg>Email<svg class="arrow"><use href="#i-arrow"/></svg></a>
+        <a href="assets/Ghadi_Nehme_CV.pdf" target="_blank" rel="noopener"><svg><use href="#i-file"/></svg>Curriculum Vitae (PDF)<svg class="arrow"><use href="#i-arrow"/></svg></a>
+        <a href="https://scholar.google.com/citations?user=AfQYxYMAAAAJ&amp;hl=en" target="_blank" rel="noopener"><svg><use href="#i-scholar"/></svg>Google Scholar<svg class="arrow"><use href="#i-arrow"/></svg></a>
+        <a href="https://github.com/ghadinehme" target="_blank" rel="noopener"><svg><use href="#i-github"/></svg>GitHub<svg class="arrow"><use href="#i-arrow"/></svg></a>
+        <a href="https://www.linkedin.com/in/ghadi-nehme/" target="_blank" rel="noopener"><svg><use href="#i-linkedin"/></svg>LinkedIn<svg class="arrow"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Ghadi Nehme</span>
+    <span>Last updated September 2026</span>
+  </div>
+</footer>
+
+<button class="icon-btn to-top" id="toTop" aria-label="Back to top"><svg><use href="#i-up"/></svg></button>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
