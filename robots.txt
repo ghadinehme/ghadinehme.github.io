@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ghadinehme.github.io/sitemap.xml

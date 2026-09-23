@@ -5,7 +5,11 @@ Personal academic website of Ghadi Nehme (MIT). It is a plain static site (HTML,
 ## Structure
 
 ```
-index.html                 all page content (sections are marked with comments)
+index.html                 home: intro, Featured walkthroughs, news, videos, contact
+publications.html          all papers
+projects.html              research, course and hardware projects
+experience.html            experience, awards, education, teaching
+404.html, sitemap.xml, robots.txt
 assets/css/style.css       styles, including light and dark themes
 assets/js/main.js          theme toggle, hover animations, scroll effects
 assets/Ghadi_Nehme_CV.pdf  CV linked from the nav and hero
@@ -16,9 +20,8 @@ assets/reports/            project reports and thesis PDFs
 
 ## Common edits
 
-- **Add a news item:** copy an `<li>` in `#newsList`, newest first.
-- **Add a paper:** copy an `<article class="pub">` block. Put a 1200px-wide teaser in `assets/img/pubs/`.
-  To get an animated preview on hover, add `data-hover="path/to.gif"` to the `<img>`.
+- **Add a news item:** copy an `<li>` in `#newsList` (index.html), newest first. Category tags: `cat-paper`, `cat-award`, `cat-press`, `cat-career`, `cat-teaching`.
+- **Add a paper:** copy an `<article class="pub">` block in publications.html. Put an 800×500 thumbnail in `assets/img/pubs/` (figures on white get class `fig`, photos get `photo`).
 - **Update the CV:** replace `assets/Ghadi_Nehme_CV.pdf` and keep the same filename.
 
 ## Preview locally

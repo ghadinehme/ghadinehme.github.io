@@ -68,6 +68,19 @@
     card.addEventListener('mouseleave', function () { img.src = still; });
   });
 
+  // Lite YouTube embeds: load the player only when a card is clicked
+  document.querySelectorAll('.video-card[data-yt]').forEach(function (card) {
+    card.addEventListener('click', function () {
+      if (card.classList.contains('playing')) return;
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + card.getAttribute('data-yt') + '?autoplay=1&rel=0&modestbranding=1';
+      f.title = card.getAttribute('aria-label') || 'Video';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.allowFullscreen = true;
+      card.appendChild(f); card.classList.add('playing');
+    });
+  });
+
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 })();
