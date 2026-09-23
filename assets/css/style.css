@@ -317,15 +317,15 @@ section.alt .job .logo { box-shadow: 0 0 0 5px var(--bg-alt), var(--shadow); }
 }
 
 /* ---------- Affiliation logos (hero) ---------- */
-.affil { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); }
+.affil { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); }
 .affil-label { display: block; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 10px; }
-.affil-logos { display: flex; flex-wrap: wrap; gap: 10px; }
+.affil-logos { display: flex; flex-wrap: wrap; gap: 8px; }
 .affil-logos a {
-  width: 52px; height: 52px; border-radius: 13px; background: #fff; border: 1px solid var(--line);
+  width: 40px; height: 40px; border-radius: 10px; background: #fff; border: 1px solid var(--line);
   display: grid; place-items: center; transition: transform .15s, box-shadow .15s;
 }
 .affil-logos a:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-.affil-logos img { width: 38px; height: 38px; object-fit: contain; }
+.affil-logos img { width: 28px; height: 28px; object-fit: contain; }
 
 /* ---------- Education ---------- */
 .edu { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
