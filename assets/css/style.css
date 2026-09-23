@@ -187,22 +187,6 @@ section.block.alt { background: var(--bg-alt); border-block: 1px solid var(--lin
 .sec-head p { margin: 6px 0 0; color: var(--muted); font-size: .95rem; }
 .sec-num { font-family: var(--sans); font-size: .78rem; color: var(--accent); font-weight: 600; letter-spacing: .12em; display: block; margin-bottom: 6px; }
 
-/* ---------- Research themes ---------- */
-.themes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.theme {
-  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-  overflow: hidden; display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s;
-}
-.theme:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-.theme .thumb { aspect-ratio: 16 / 9; background: #fff; overflow: hidden; border-bottom: 1px solid var(--line); }
-.theme .thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.theme .body { padding: 18px 20px 20px; }
-.theme h3 { font-size: 1.05rem; margin-bottom: 6px; }
-.theme p { font-size: .92rem; margin: 0 0 10px; }
-.theme .refs { font-size: .8rem; color: var(--muted); }
-.theme .refs a { font-weight: 600; }
-@media (max-width: 860px) { .themes { grid-template-columns: 1fr; } }
-
 /* ---------- News ---------- */
 .news { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
 .news li {
