@@ -253,14 +253,6 @@ section.block.alt { background: var(--bg-alt); border-block: 1px solid var(--lin
 }
 .btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
 .btn svg { width: 14px; height: 14px; }
-.bibtex {
-  display: none; margin-top: 12px; position: relative;
-  background: var(--bg-alt); border: 1px solid var(--line); border-radius: 10px;
-  padding: 14px 16px; font: 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace;
-  white-space: pre; overflow-x: auto; color: var(--ink-2);
-}
-.bibtex.open { display: block; }
-.bibtex .copy { position: absolute; top: 8px; right: 8px; }
 @media (max-width: 760px) { .pub { grid-template-columns: 1fr; gap: 16px; } }
 
 /* ---------- Projects ---------- */

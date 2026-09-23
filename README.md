@@ -7,7 +7,7 @@ Personal academic website of Ghadi Nehme (MIT). It is a plain static site (HTML,
 ```
 index.html                 all page content (sections are marked with comments)
 assets/css/style.css       styles, including light and dark themes
-assets/js/main.js          theme toggle, BibTeX, hover animations, scroll effects
+assets/js/main.js          theme toggle, hover animations, scroll effects
 assets/Ghadi_Nehme_CV.pdf  CV linked from the nav and hero
 assets/img/pubs/           paper teaser images (plus the VideoCAD hover GIF)
 assets/img/projects/       project images

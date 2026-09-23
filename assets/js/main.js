@@ -55,23 +55,6 @@
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
   }
 
-  // BibTeX toggle + copy
-  document.querySelectorAll('.bib-btn').forEach(function (btn) {
-    var pre = btn.closest('.pub').querySelector('.bibtex');
-    if (!pre) return;
-    var copy = document.createElement('button');
-    copy.className = 'btn copy';
-    copy.type = 'button';
-    copy.innerHTML = '<svg><use href="#i-copy"/></svg>Copy';
-    pre.appendChild(copy);
-    copy.addEventListener('click', function () {
-      var text = pre.childNodes[0].textContent.trim();
-      var done = function () { copy.lastChild.textContent = 'Copied'; setTimeout(function () { copy.lastChild.textContent = 'Copy'; }, 1500); };
-      if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, function () {});
-    });
-    btn.addEventListener('click', function () { pre.classList.toggle('open'); });
-  });
-
   // Animated preview on hover (e.g. VideoCAD demo)
   document.querySelectorAll('img[data-hover]').forEach(function (img) {
     var still = img.getAttribute('src');
