@@ -55,39 +55,6 @@
     document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
   }
 
-  // News: show first 7, toggle the rest
-  var NEWS_VISIBLE = 7;
-  var newsItems = document.querySelectorAll('#newsList li');
-  var newsBtn = document.getElementById('newsMore');
-  if (newsItems.length <= NEWS_VISIBLE) {
-    newsBtn.hidden = true;
-  } else {
-    var expanded = false;
-    var applyNews = function () {
-      newsItems.forEach(function (li, i) { li.classList.toggle('hidden', !expanded && i >= NEWS_VISIBLE); });
-      newsBtn.textContent = expanded ? 'Show less' : 'Show all news (' + newsItems.length + ')';
-    };
-    newsBtn.addEventListener('click', function () { expanded = !expanded; applyNews(); });
-    applyNews();
-  }
-
-  // Publication filters
-  var filters = document.querySelectorAll('.filter');
-  var pubs = document.querySelectorAll('.pub');
-  filters.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      filters.forEach(function (b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      var f = btn.getAttribute('data-filter');
-      pubs.forEach(function (p) {
-        var tags = (p.getAttribute('data-tags') || '').split(' ');
-        var show = f === 'all' || tags.indexOf(f) !== -1;
-        p.classList.toggle('hidden', !show);
-        if (show) p.classList.add('in');
-      });
-    });
-  });
-
   // BibTeX toggle + copy
   document.querySelectorAll('.bib-btn').forEach(function (btn) {
     var pre = btn.closest('.pub').querySelector('.bibtex');
@@ -109,7 +76,7 @@
   document.querySelectorAll('img[data-hover]').forEach(function (img) {
     var still = img.getAttribute('src');
     var anim = img.getAttribute('data-hover');
-    var card = img.closest('.pub') || img;
+    var card = img.closest('.pub, .project') || img;
     var preloaded = false;
     card.addEventListener('mouseenter', function () {
       if (!preloaded) { new Image().src = anim; preloaded = true; }

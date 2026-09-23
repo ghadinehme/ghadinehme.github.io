@@ -145,7 +145,7 @@
           <p>
             Before MIT, I earned an MS in Mechanical Engineering from <strong>Stanford</strong> (robotics, surgical robots,
             reinforcement learning, neural decoding) and a BS in Mathematics &amp; Physics from <strong>École Polytechnique</strong>
-            as class valedictorian. I also interned at <strong>Google</strong> and CNRS, and co-founded an AI startup for automating CAD.
+            as class valedictorian. I also interned at <strong>Google</strong> and CNRS.
           </p>
         </div>
 
@@ -168,12 +168,6 @@
       </div>
     </div>
 
-    <div class="stats reveal">
-      <div class="stat"><b>3</b><span>first-/co-first-author papers at NeurIPS &amp; ICML</span></div>
-      <div class="stat"><b>2</b><span>Best Paper Awards at ASME IDETC-CIE 2026</span></div>
-      <div class="stat"><b>41K+</b><span>annotated CAD videos released in VideoCAD</span></div>
-      <div class="stat"><b>290+</b><span>GitHub stars on open-source research code</span></div>
-    </div>
   </div>
 </section>
 
@@ -241,7 +235,6 @@
       <li><time>Jun 2023</time><div><span class="emoji">💼</span>Joined <b>Google</b> as a Hardware Engineering Intern in Mountain View.</div></li>
       <li><time>Jun 2022</time><div><span class="emoji">🎓</span>Graduated from <b>École Polytechnique</b> as class valedictorian, summa cum laude.</div></li>
     </ul>
-    <button class="more-btn" id="newsMore">Show all news</button>
   </div>
 </section>
 
@@ -253,12 +246,6 @@
         <span class="sec-num">PUBLICATIONS</span>
         <h2>Papers</h2>
         <p>* denotes equal contribution. See also <a href="https://scholar.google.com/citations?user=AfQYxYMAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
-      </div>
-      <div class="filters" role="tablist" aria-label="Filter publications">
-        <button class="filter active" data-filter="all">All</button>
-        <button class="filter" data-filter="first">First author</button>
-        <button class="filter" data-filter="conference">Conference</button>
-        <button class="filter" data-filter="preprint">Preprints</button>
       </div>
     </div>
 
@@ -508,10 +495,10 @@
     <div class="projects">
 
       <article class="project reveal">
-        <div class="thumb"><img src="assets/img/projects/sketch2cad.jpg" alt="Sketch-to-CAD command sequence" loading="lazy"><span class="when">MIT · 2024</span></div>
+        <div class="thumb"><img src="assets/img/projects/sketch2cad.jpg" alt="Sketch-to-CAD command sequence" loading="lazy"><span class="when">MIT 2.156 · 2024</span></div>
         <div class="body">
           <h3>Sketch-to-CAD: CAD Models from Hand-Drawn Sketches</h3>
-          <div class="org">MIT · Computer Vision</div>
+          <div class="org">MIT · Course 2.156</div>
           <p>Built a dataset of 166K hand-drawn sketches paired with DeepCAD models, and a CNN encoder with a Transformer decoder that predicts parametric CAD sequences (91% command accuracy).</p>
           <div class="tags"><span class="tag">Transformers</span><span class="tag">CAD</span><span class="tag">Dataset</span></div>
           <div class="pub-links"><a class="btn" href="assets/reports/sketch-to-cad-report.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>Report</a></div>
@@ -519,10 +506,10 @@
       </article>
 
       <article class="project reveal">
-        <div class="thumb"><img src="assets/img/projects/llm-robot.jpg" alt="Robot arm in simulated kitchen" loading="lazy"><span class="when">MIT · 2024</span></div>
+        <div class="thumb"><img src="assets/img/projects/llm-robot.jpg" alt="Robot arm in simulated kitchen" loading="lazy"><span class="when">MIT 6.4212 · 2024</span></div>
         <div class="body">
           <h3>LLM-Driven Adaptive Robotic Manipulation</h3>
-          <div class="org">MIT · Robotics</div>
+          <div class="org">MIT 6.4212 · Robotic Manipulation</div>
           <p>LLM and VLM-based high-level task planning for a robot arm in a simulated kitchen: stacking, sorting, and table setup with affordance-based actions and antipodal grasping.</p>
           <div class="tags"><span class="tag">LLMs</span><span class="tag">VLMs</span><span class="tag">Manipulation</span></div>
           <div class="pub-links"><a class="btn" href="assets/reports/llm-robotic-manipulation.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>Report</a></div>
@@ -530,10 +517,41 @@
       </article>
 
       <article class="project reveal">
-        <div class="thumb"><img src="assets/img/projects/robot-design.jpg" alt="Robot workspace optimization" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">Stanford · 2024</span></div>
+        <div class="thumb"><img src="assets/img/projects/ur5.jpg" alt="UR5 robot arm sorting bottles from a conveyor into colored bins" loading="lazy"><span class="when">MIT 2.120 · 2025</span></div>
+        <div class="body">
+          <h3>Vision-Guided Sorting with a UR5 Robot Arm</h3>
+          <div class="org">MIT 2.120 · Robotics</div>
+          <p>A pick-and-place cell where a RealSense depth camera detects bottles on a conveyor, PCA estimates their pose, and a UR5 with a custom ESP32-driven suction gripper sorts them into bins by type.</p>
+          <div class="tags"><span class="tag">UR5</span><span class="tag">Perception</span><span class="tag">ESP32</span></div>
+          <div class="pub-links"><a class="btn" href="https://github.com/ghadinehme/2.120-ur5" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/tissue-retraction.jpg" data-hover="assets/img/projects/tissue-retraction.gif" alt="da Vinci robot retracting a silicone tissue sample" loading="lazy"><span class="when">Stanford · 2024</span></div>
+        <div class="body">
+          <h3>Autonomous Tissue Retraction Across Variable Stiffnesses</h3>
+          <div class="org">Stanford CHARM Lab · with Alaa Eldin Abdelaal</div>
+          <p>Molded silicone tissue phantoms of four stiffnesses (Dragon Skin 30/10, Ecoflex 00-30/00-20), designed and 3D-printed matching fixtures, and measured retraction forces by hand and with the da Vinci robot to test how a learned retraction policy generalizes.</p>
+          <div class="tags"><span class="tag">da Vinci</span><span class="tag">Surgical Robotics</span><span class="tag">Force Sensing</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/neurosurgery-robot.jpg" data-hover="assets/img/projects/neurosurgery-robot.gif" alt="CAD of a neurosurgery robot concept and optimized robotic arms" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">Stanford · 2023</span></div>
+        <div class="body">
+          <h3>Neurosurgery Robot: System Design &amp; Link Optimization</h3>
+          <div class="org">Stanford CHARM Lab · System team, with Joshua Lin</div>
+          <p>Designed a Mayfield-mounted rotating arch that carries two robotic arms for superficial neurosurgery, and optimized the arm link lengths so the end effectors can reach target trajectories. The optimized arms were modeled in CAD with interchangeable tools.</p>
+          <div class="tags"><span class="tag">Robot Design</span><span class="tag">Optimization</span><span class="tag">SolidWorks</span></div>
+        </div>
+      </article>
+
+      <article class="project reveal">
+        <div class="thumb"><img src="assets/img/projects/robot-design.jpg" alt="Robot workspace optimization" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">Stanford CS361 · 2024</span></div>
         <div class="body">
           <h3>Multi-Objective Optimization Framework for Robot Design</h3>
-          <div class="org">Stanford · Robot Design</div>
+          <div class="org">Stanford CS361 · Engineering Design Optimization</div>
           <p>Combined genetic algorithms and gradient descent to optimize robot kinematics for manipulability, precision, and safety in surgical and dental applications.</p>
           <div class="tags"><span class="tag">Optimization</span><span class="tag">Medical Robotics</span></div>
           <div class="pub-links">
@@ -555,10 +573,10 @@
       </article>
 
       <article class="project reveal">
-        <div class="thumb"><img src="assets/img/projects/mrl.jpg" alt="Predicted vs observed mean ribosome load" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">Stanford · 2023</span></div>
+        <div class="thumb"><img src="assets/img/projects/mrl.jpg" alt="Predicted vs observed mean ribosome load" loading="lazy" style="object-fit:contain;background:#fff"><span class="when">Stanford CS229 · 2023</span></div>
         <div class="body">
           <h3>Predicting Mean Ribosome Load of 5′UTRs with Transformers</h3>
-          <div class="org">Stanford · with Marie Huynh</div>
+          <div class="org">Stanford CS229 · Machine Learning · with Marie Huynh</div>
           <p>Transformer models that predict translation efficiency from mRNA 5′UTR sequences, motivated by mRNA therapeutics (best R² = 0.95).</p>
           <div class="tags"><span class="tag">Transformers</span><span class="tag">Genomics</span></div>
           <div class="pub-links"><a class="btn" href="assets/reports/mrl-5utr-prediction.pdf" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>Report</a></div>
@@ -604,15 +622,12 @@
       </article>
 
       <article class="project reveal">
-        <div class="thumb">
-          <div class="ph"><svg><use href="#i-gear"/></svg></div>
-          <span class="when">Open source</span>
-        </div>
+        <div class="thumb"><img src="assets/img/projects/cadstudio.jpg" alt="CADStudio web interface with feature tree and 3D viewport" loading="lazy"><span class="when">Open source · 2026</span></div>
         <div class="body">
           <h3>CADStudio</h3>
           <div class="org">Open source · Companion to CADFit</div>
-          <p>An AI-native parametric CAD environment that runs in the browser, built alongside CADFit (<a href="https://meche.mit.edu/news-media/ai-guided-optimization-tool-makes-product-design-faster-and-more-accessible" target="_blank" rel="noopener">featured by MIT MechE</a>).</p>
-          <div class="tags"><span class="tag">JavaScript</span><span class="tag">CAD</span><span class="tag">AI Agents</span></div>
+          <p>An AI-native parametric CAD environment in the browser. It loads AI-generated CadQuery code (e.g. from CADFit) into an editable feature tree backed by a real B-rep kernel, then exports clean code back for an AI to keep editing. Built alongside CADFit (<a href="https://meche.mit.edu/news-media/ai-guided-optimization-tool-makes-product-design-faster-and-more-accessible" target="_blank" rel="noopener">featured by MIT MechE</a>).</p>
+          <div class="tags"><span class="tag">CadQuery</span><span class="tag">Three.js</span><span class="tag">AI-native CAD</span></div>
           <div class="pub-links"><a class="btn" href="https://github.com/ghadinehme/CADStudio" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a></div>
         </div>
       </article>
@@ -739,15 +754,6 @@
             <li>Designed the system and control of a neurosurgery robot combining an endoscope, an exoscope, and robotic arms.</li>
             <li>Trained the da Vinci surgical robot to autonomously retract tissues of varying stiffness.</li>
           </ul>
-        </div>
-      </div>
-
-      <div class="job reveal">
-        <div class="dot" style="background:#3d424d">DV</div>
-        <div class="card">
-          <div class="top"><h3>Co-Founder &amp; CTO</h3><span class="date">Oct 2023 – Jun 2024</span></div>
-          <div class="org">DaVinci · AI startup for automating CAD</div>
-          <ul><li>Built an AI model that converts 2D sketches to CAD, streamlining the design process.</li></ul>
         </div>
       </div>
 

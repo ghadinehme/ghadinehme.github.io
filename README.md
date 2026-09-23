@@ -7,7 +7,7 @@ Personal academic website of Ghadi Nehme (MIT). It is a plain static site (HTML,
 ```
 index.html                 all page content (sections are marked with comments)
 assets/css/style.css       styles, including light and dark themes
-assets/js/main.js          theme toggle, publication filters, BibTeX, news toggle, scroll effects
+assets/js/main.js          theme toggle, BibTeX, hover animations, scroll effects
 assets/Ghadi_Nehme_CV.pdf  CV linked from the nav and hero
 assets/img/pubs/           paper teaser images (plus the VideoCAD hover GIF)
 assets/img/projects/       project images
@@ -16,8 +16,8 @@ assets/reports/            project reports and thesis PDFs
 
 ## Common edits
 
-- **Add a news item:** copy an `<li>` in `#newsList`, newest first. Only the first 7 are shown until the visitor clicks "Show all".
-- **Add a paper:** copy an `<article class="pub">` block. `data-tags` controls which filter buttons show it (`first`, `conference`, `preprint`). Put a 1200px-wide teaser in `assets/img/pubs/`.
+- **Add a news item:** copy an `<li>` in `#newsList`, newest first.
+- **Add a paper:** copy an `<article class="pub">` block. Put a 1200px-wide teaser in `assets/img/pubs/`.
   To get an animated preview on hover, add `data-hover="path/to.gif"` to the `<img>`.
 - **Update the CV:** replace `assets/Ghadi_Nehme_CV.pdf` and keep the same filename.
 
