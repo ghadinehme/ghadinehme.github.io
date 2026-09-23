@@ -293,21 +293,39 @@ section.block.alt { background: var(--bg-alt); border-block: 1px solid var(--lin
 
 /* ---------- Experience timeline ---------- */
 .timeline { position: relative; display: grid; gap: 14px; }
-.timeline::before { content: ""; position: absolute; left: 21px; top: 8px; bottom: 8px; width: 2px; background: var(--line); }
-.job { display: grid; grid-template-columns: 44px 1fr; gap: 18px; position: relative; }
-.job .dot {
-  width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
-  font: 700 .82rem var(--sans); color: #fff; z-index: 1; box-shadow: 0 0 0 5px var(--bg);
+.timeline::before { content: ""; position: absolute; left: 29px; top: 12px; bottom: 12px; width: 2px; background: var(--line); }
+.job { display: grid; grid-template-columns: 60px 1fr; gap: 18px; position: relative; }
+.job .logo {
+  width: 60px; height: 60px; border-radius: 16px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; z-index: 1; box-shadow: 0 0 0 5px var(--bg), var(--shadow);
 }
-section.alt .job .dot { box-shadow: 0 0 0 5px var(--bg-alt); }
-.job .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; }
+section.alt .job .logo { box-shadow: 0 0 0 5px var(--bg-alt), var(--shadow); }
+.job .logo img { width: 44px; height: 44px; object-fit: contain; }
+.job .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 20px; transition: box-shadow .2s, transform .2s; }
+.job:hover .card { box-shadow: var(--shadow-lg); transform: translateX(2px); }
 .job .top { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
 .job h3 { font-size: 1.02rem; }
 .job .org { color: var(--accent); font-weight: 600; font-size: .9rem; }
 .job .date { font-size: .8rem; color: var(--muted); font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .job ul { margin-top: 8px; font-size: .9rem; }
 .job li { margin-bottom: 3px; }
-.job .kind { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-left: 6px; }
+@media (max-width: 520px) {
+  .job { grid-template-columns: 44px 1fr; gap: 12px; }
+  .job .logo { width: 44px; height: 44px; border-radius: 12px; }
+  .job .logo img { width: 32px; height: 32px; }
+  .timeline::before { left: 21px; }
+}
+
+/* ---------- Affiliation logos (hero) ---------- */
+.affil { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); }
+.affil-label { display: block; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 10px; }
+.affil-logos { display: flex; flex-wrap: wrap; gap: 10px; }
+.affil-logos a {
+  width: 52px; height: 52px; border-radius: 13px; background: #fff; border: 1px solid var(--line);
+  display: grid; place-items: center; transition: transform .15s, box-shadow .15s;
+}
+.affil-logos a:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.affil-logos img { width: 38px; height: 38px; object-fit: contain; }
 
 /* ---------- Education ---------- */
 .edu { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -315,6 +333,9 @@ section.alt .job .dot { box-shadow: 0 0 0 5px var(--bg-alt); }
 .school::after { content: ""; position: absolute; left: 0; top: 0; right: 0; height: 4px; background: var(--c, var(--accent)); }
 .school .yrs { font-size: .78rem; color: var(--muted); font-weight: 600; }
 .school h3 { font-family: var(--serif); font-weight: 500; font-size: 1.35rem; margin: 6px 0 2px; }
+.school-logo { width: 48px; height: 48px; object-fit: contain; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 5px; margin: 10px 0 4px; }
+.edu-extra .school { display: grid; grid-template-columns: 48px 1fr; column-gap: 14px; align-items: center; }
+.edu-extra .school .school-logo { grid-row: 1 / span 3; margin: 0; }
 .school .deg { color: var(--ink); font-weight: 600; font-size: .92rem; margin-bottom: 10px; }
 .school ul { font-size: .86rem; padding-left: 1.1em; }
 .edu-extra { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -394,3 +415,5 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
   transition: opacity .3s;
 }
 .to-top.show { opacity: 1; pointer-events: auto; }
+.edu-extra .school > *:not(.school-logo) { grid-column: 2; }
+.edu-extra .school .school-logo { grid-column: 1; }
