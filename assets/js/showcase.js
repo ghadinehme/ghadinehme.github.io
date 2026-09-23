@@ -25,6 +25,81 @@
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+
+  // ---------- CADFit (pre-rendered walkthrough video + synced steps/code) ----------
+  function initCadfit() {
+    var video = document.getElementById('cfVideo');
+    var stepsEl = document.getElementById('cfSteps');
+    var codeEl = document.getElementById('cfCode');
+    if (!video || !stepsEl) return;
+    var STAGES = [
+      ['mesh', 'Input mesh', 3000], ['sketch', 'Extract sections', 4200], ['extrude', 'Search: Extrude height', 5200],
+      ['revolve', 'Search: Revolve angle', 3800], ['greedy', 'IoU-guided selection', 4200],
+      ['residual', 'Residual refinement', 3800], ['done', 'Construction sequence', 4200]
+    ];
+    var CODE = [
+      ['extrude', '<c># 1 · profile from a planar face</c>'],
+      ['extrude', 'plane_1 = cq.Plane(origin, normal, xDir)'],
+      ['extrude', 'sketch_1 = cq.Workplane(plane_1)'],
+      ['extrude', 'loop_1 = sketch_1.moveTo(p0)'],
+      ['extrude', 'loop_1 = loop_1.threePointArc(p1, p2)  <c># ×48, belt teeth</c>'],
+      ['extrude', 'solid_1 = sketch_1.<k>extrude</k>(<n>0.57</n>)'],
+      ['revolve', '<c># 2 · profile from an axis-aligned section</c>'],
+      ['revolve', 'plane_2 = cq.Plane(origin, normal, xDir)'],
+      ['revolve', 'sketch_2 = cq.Workplane(plane_2).moveTo(p0)'],
+      ['revolve', 'sketch_2 = sketch_2.lineTo(p1)  <c># ×11 segments</c>'],
+      ['revolve', 'solid_2 = sketch_2.<k>revolve</k>(<n>360</n>, axisStart, axisEnd)'],
+      ['greedy', 'result = solid_2.<k>union</k>(solid_1)'],
+      ['residual', '<c># 3 · residual refinement</c>'],
+      ['residual', 'residual = extrude_a.union(extrude_b).union(extrude_c)'],
+      ['residual', 'result = result.<k>cut</k>(residual)']
+    ];
+    var order = STAGES.map(function (s) { return s[0]; });
+    var starts = []; var acc = 0;
+    STAGES.forEach(function (s) { starts.push(acc); acc += s[2]; });
+    stepsEl.innerHTML = STAGES.map(function (s, i) {
+      return '<li><button type="button"><span class="ic">' + (i + 1) + '</span>' + s[1] + '</button></li>';
+    }).join('');
+    var items = stepsEl.querySelectorAll('li');
+    function fmt(l) {
+      return l.replace(/<c>/g, '<span class="c-c">').replace(/<\/c>/g, '</span>').replace(/<k>/g, '<span class="c-k">')
+        .replace(/<\/k>/g, '</span>').replace(/<n>/g, '<span class="c-n">').replace(/<\/n>/g, '</span>');
+    }
+    var cur = -1;
+    function setStage(si) {
+      if (si === cur) return; cur = si;
+      items.forEach(function (li, i) { li.classList.toggle('done', i < si); li.classList.toggle('active', i === si); });
+      var html = CODE.filter(function (c) { return order.indexOf(c[0]) <= si; }).map(function (c) {
+        return c[0] === order[si] ? '<span class="c-new">' + fmt(c[1]) + '</span>' : fmt(c[1]);
+      }).join('\n');
+      codeEl.innerHTML = html || '<span class="c-c"># construction sequence appears here</span>';
+      codeEl.scrollTop = codeEl.scrollHeight;
+    }
+    function sync() {
+      var ms = (video.currentTime * 1000) % acc, si = 0;
+      for (var i = 0; i < starts.length; i++) if (ms >= starts[i]) si = i;
+      setStage(si);
+    }
+    video.addEventListener('timeupdate', sync);
+    video.addEventListener('seeked', sync);
+    items.forEach(function (li, i) {
+      li.querySelector('button').addEventListener('click', function () {
+        video.currentTime = starts[i] / 1000 + 0.05; video.play().catch(function () {}); sync();
+      });
+    });
+    setStage(0);
+    if (reduceMotion) { video.removeAttribute('autoplay'); video.pause(); video.currentTime = starts[6] / 1000 + 1; }
+    // only play while visible
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) {
+      if (reduceMotion) return;
+      if (e[0].isIntersecting && !document.getElementById('panel-cadfit').hidden) video.play().catch(function () {});
+      else video.pause();
+    }).observe(video);
+    document.addEventListener('showcase:tab', function (e) {
+      if (e.detail === 'cadfit' && !reduceMotion) video.play().catch(function () {}); else video.pause();
+    });
+  }
+
   // ---------- LAMP ----------
   function initLamp() {
     var BASE = 'assets/showcase/lamp/';
@@ -34,7 +109,8 @@
     var paramEl = document.getElementById('lampParam');
     var chips = document.getElementById('lampChips');
     var view = document.getElementById('panel-lamp');
-    var sweeps = [], cur = null, auto = !reduceMotion, dir = 1, timer = null;
+    var sweeps = [], cur = null, auto = !reduceMotion, dir = 1, timer = null, onScreen = false;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { onScreen = e[0].isIntersecting; }).observe(view); else onScreen = true;
 
     function setFrame(i) {
       var s = sweeps[cur];
@@ -58,7 +134,7 @@
       setFrame(Math.floor(s.frames.length / 2));
     }
     function tick() {
-      if (!auto || cur === null || view.hidden) return;
+      if (!auto || cur === null || view.hidden || !onScreen || document.hidden) return;
       var s = sweeps[cur], i = +slider.value + dir;
       if (i >= s.frames.length - 1 || i <= 0) dir = -dir;
       setFrame(i);
@@ -112,25 +188,38 @@
         target.src = BASE + v.id + '_target.png';
       }
       picker.querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { pick(+b.getAttribute('data-k')); }); });
+      var curK = 4, shown = true;
+      var basePick = pick;
+      pick = function (k) { curK = k; basePick(k); };
       pick(4);
+      // stop the GIF (show its poster) while the episode view is off screen
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (e) {
+        var on = e[0].isIntersecting;
+        if (on === shown) return; shown = on;
+        video.src = BASE + vids[curK].id + (on && !reduceMotion ? '.gif' : '_poster.jpg');
+      }).observe(video);
     });
 
     fetch(BASE + 'results.json').then(function (r) { return r.json(); }).then(function (res) {
       var g = document.getElementById('vcI2C');
+      function tile(src, alt, label, cls) {
+        return '<div class="vc-tile' + (cls ? ' ' + cls : '') + '"><img src="' + BASE + src + '" alt="' + alt + '" loading="lazy" width="400" height="400"><span>' + label + '</span></div>';
+      }
       g.innerHTML = res.image2cad.map(function (p) {
-        return '<figure class="vc-pair"><div class="t"><img src="' + BASE + p.target + '" alt="Target image" loading="lazy"><span>Input image</span></div>' +
-          '<div class="r"><img src="' + BASE + p.result + '" alt="CAD model built in Onshape by VideoCADFormer" loading="lazy"><span>Built in Onshape</span></div></figure>';
+        return '<figure class="vc-card">' + tile(p.target, 'Target image', 'Input image', 'in') +
+          '<i class="vc-op">&rarr;</i>' + tile(p.result, 'CAD model built in Onshape by VideoCADFormer', 'Built in Onshape') + '</figure>';
       }).join('');
       var a = document.getElementById('vcAuto');
       a.innerHTML = res.autocomplete.map(function (p) {
-        return '<figure class="vc-trip"><div><img src="' + BASE + p.start + '" alt="Intermediate CAD state" loading="lazy"><span>Partial model</span></div>' +
-          '<div class="t"><img src="' + BASE + p.target + '" alt="Target image" loading="lazy"><span>Target</span></div>' +
-          '<div><img src="' + BASE + p.final + '" alt="Completed CAD model" loading="lazy"><span>Completed</span></div></figure>';
+        return '<figure class="vc-card three">' + tile(p.start, 'Partially built CAD model', 'Partial model') +
+          '<i class="vc-op">+</i>' + tile(p.target, 'Target image', 'Target image', 'in') +
+          '<i class="vc-op">&rarr;</i>' + tile(p.final, 'Completed CAD model', 'Completed') + '</figure>';
       }).join('');
     });
   }
 
   var initers = { lamp: initLamp, videocad: initVideoCAD };
+  initCadfit();
   // deep links: #cadfit, #lamp, #videocad open that tab
   function fromHash() {
     var h = location.hash.slice(1);

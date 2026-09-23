@@ -16,13 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=9">
-  <script type="importmap">
-  { "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-  } }
-  </script>
+  <link rel="stylesheet" href="assets/css/style.css?v=12">
 
   <script>
     (function () {
@@ -89,7 +83,7 @@
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
-      <li><a href="#research">Research</a></li>
+      <li><a href="#research">Featured</a></li>
       <li><a href="#news">News</a></li>
       <li><a href="#publications">Publications</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -199,7 +193,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <span class="sec-num">RESEARCH IN MOTION</span>
+        <span class="sec-num">FEATURED</span>
         <h2>How my methods work</h2>
         <p>Interactive walkthroughs built from real examples and data from the papers.</p>
       </div>
@@ -212,13 +206,9 @@
 
     <!-- CADFit -->
     <div class="sc-stage sc-panel active" id="panel-cadfit" data-panel="cadfit" role="tabpanel">
-      <div class="sc-view">
-        <canvas id="cfCanvas" aria-label="CADFit reconstructing a timing pulley from a mesh"></canvas>
-        <div class="sc-hud">
-          <span class="sc-pill"><span class="dot"></span><span id="cfStatus">Loading…</span></span>
-          <span class="sc-iou" id="cfIou" hidden>IoU <b>0.000</b></span>
-        </div>
-        <div class="cf-chart" id="cfChart" hidden></div>
+      <div class="sc-view cf-view">
+        <video id="cfVideo" src="assets/showcase/cadfit/cadfit_walkthrough.mp4" poster="assets/showcase/cadfit/cadfit_poster.jpg"
+               autoplay muted loop playsinline preload="auto" aria-label="CADFit reconstructing a timing pulley from a mesh, step by step"></video>
       </div>
       <aside class="sc-side">
         <div class="sc-head">
@@ -1053,7 +1043,6 @@
 <button class="icon-btn to-top" id="toTop" aria-label="Back to top"><svg><use href="#i-up"/></svg></button>
 
 <script src="assets/js/main.js?v=6"></script>
-<script src="assets/js/showcase.js?v=2"></script>
-<script type="module" src="assets/js/cadfit3d.js?v=2"></script>
+<script src="assets/js/showcase.js?v=4"></script>
 </body>
 </html>
