@@ -136,7 +136,19 @@ ul { margin: 0; padding-left: 1.2em; }
 .hero .role { font-size: 1.1rem; color: var(--ink); margin-bottom: 18px; }
 .hero .role a { color: inherit; border-bottom: 1px solid var(--line); }
 .hero .role a:hover { border-color: var(--accent); text-decoration: none; }
+.tagline { font-family: var(--serif); font-size: clamp(1.45rem, 2.6vw, 1.9rem); line-height: 1.25; color: var(--ink); margin: -4px 0 14px; letter-spacing: -.01em; }
 .bio p { font-size: 1.04rem; }
+.bio .lede { font-size: 1.06rem; }
+.more-bio { margin: 2px 0 18px; }
+.more-bio summary {
+  display: inline-flex; align-items: center; gap: 6px; cursor: pointer; list-style: none;
+  font: 600 .88rem var(--sans); color: var(--accent); padding: 4px 0;
+}
+.more-bio summary::-webkit-details-marker { display: none; }
+.more-bio summary::after { content: ""; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform .2s; }
+.more-bio[open] summary::after { transform: rotate(-135deg) translateY(-1px); }
+.more-bio[open] summary { margin-bottom: 10px; }
+.more-bio p { font-size: .98rem; }
 .bio strong { color: var(--ink); font-weight: 600; }
 .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
 .pill {
@@ -213,11 +225,11 @@ section.block.alt { background: var(--bg-alt); border-block: 1px solid var(--lin
 }
 .filter:hover { border-color: var(--muted); }
 .filter.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-.pubs { display: grid; gap: 18px; }
+.pubs { display: grid; gap: 12px; }
 .pub {
-  display: grid; grid-template-columns: 300px 1fr; gap: 26px;
+  display: grid; grid-template-columns: 210px 1fr; gap: 20px; align-items: start;
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-  padding: 20px; transition: box-shadow .2s, border-color .2s;
+  padding: 14px 16px; transition: box-shadow .2s, border-color .2s;
 }
 .pub:hover { box-shadow: var(--shadow-lg); border-color: color-mix(in srgb, var(--accent) 30%, var(--line)); }
 .pub.hidden { display: none; }
@@ -231,20 +243,20 @@ section.block.alt { background: var(--bg-alt); border-block: 1px solid var(--lin
   position: absolute; left: 10px; top: 10px; background: rgba(22, 24, 29, .88); color: #fff; z-index: 1;
   font-size: .72rem; font-weight: 700; padding: 3px 8px; border-radius: 6px; letter-spacing: .04em;
 }
-.pub h3 { font-size: 1.12rem; line-height: 1.35; margin-bottom: 6px; font-weight: 650; }
+.pub h3 { font-size: 1.02rem; line-height: 1.35; margin-bottom: 4px; font-weight: 650; }
 .pub h3 a { color: var(--ink); }
 .pub h3 a:hover { color: var(--accent); }
-.authors { font-size: .9rem; margin-bottom: 4px; }
+.authors { font-size: .86rem; margin-bottom: 2px; }
 .authors .me { color: var(--ink); font-weight: 650; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
 .authors sup { color: var(--muted); }
-.venue { font-size: .9rem; font-style: italic; color: var(--ink); margin-bottom: 10px; }
-.badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.venue { font-size: .86rem; font-style: italic; color: var(--ink); margin-bottom: 8px; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
 .badge { font-size: .74rem; font-weight: 600; padding: 3px 9px; border-radius: 6px; display: inline-flex; gap: 5px; align-items: center; }
 .badge.prize { background: var(--gold-soft); color: var(--gold); }
 .badge.conf { background: var(--navy-soft); color: var(--navy); }
 .badge.review { background: var(--bg-alt); color: var(--muted); border: 1px dashed var(--line); }
 .badge.press { background: var(--green-soft); color: var(--green); }
-.pub .tldr { font-size: .92rem; margin-bottom: 12px; }
+.pub .tldr { font-size: .87rem; line-height: 1.55; margin-bottom: 10px; }
 .pub-links { display: flex; flex-wrap: wrap; gap: 6px; }
 .btn {
   display: inline-flex; align-items: center; gap: 6px; font: 600 .8rem var(--sans);
@@ -252,8 +264,10 @@ section.block.alt { background: var(--bg-alt); border-block: 1px solid var(--lin
   color: var(--ink); cursor: pointer; transition: all .15s;
 }
 .btn:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+.btn.demo { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.demo:hover { filter: brightness(1.08); color: #fff; }
 .btn svg { width: 14px; height: 14px; }
-@media (max-width: 760px) { .pub { grid-template-columns: 1fr; gap: 16px; } }
+@media (max-width: 760px) { .pub { grid-template-columns: 1fr; gap: 12px; } .pub .thumb { max-width: 360px; } }
 
 /* ---------- Projects ---------- */
 .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
@@ -453,6 +467,10 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 .sc-stats span { font-size: .74rem; color: #8ea2c2; }
 .cf-view { background: #0b1422; }
 .cf-view video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.cf-timeline { position: absolute; left: 0; right: 0; bottom: 0; height: 12px; display: flex; gap: 3px; padding: 0 3px 4px; z-index: 2; }
+.cf-timeline button { all: unset; cursor: pointer; position: relative; height: 4px; margin-top: 4px; border-radius: 2px; background: rgba(143,184,255,.22); overflow: hidden; transition: height .15s, margin .15s; }
+.cf-timeline button:hover { height: 8px; margin-top: 0; }
+.cf-timeline i { position: absolute; inset: 0; background: #ff6b7f; transform-origin: left; transform: scaleX(0); }
 .showcase .failed .sc-view::after { content: "3D preview unavailable"; position: absolute; inset: 0; display: grid; place-items: center; color: #7f93b2; }
 
 /* CADFit steps + chart */
@@ -542,6 +560,8 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 @media (max-width: 900px) {
   .sc-stage { grid-template-columns: 1fr; height: auto; }
   .sc-view { min-height: 360px; }
+  .cf-view { min-height: 0; aspect-ratio: 880 / 752; }
+  .cf-view video { object-fit: contain; }
   .sc-side { border-left: 0; border-top: 1px solid rgba(143,184,255,.14); }
   .vc-grid, .vc-grid.auto { grid-template-columns: 1fr; }
 }

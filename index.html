@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=12">
+  <link rel="stylesheet" href="assets/css/style.css?v=15">
 
   <script>
     (function () {
@@ -123,11 +123,18 @@
       <div>
         <span class="eyebrow">PhD Student · MIT</span>
         <h1>Ghadi Nehme</h1>
-        <div class="role">
-          <a href="https://decode.mit.edu/" target="_blank" rel="noopener">DeCoDe Lab</a>,
-          Department of Mechanical Engineering, Massachusetts Institute of Technology
-        </div>
+        <p class="tagline">I build AI that designs like an engineer.</p>
         <div class="bio">
+          <p class="lede">
+            I'm a PhD student in Mechanical Engineering at <strong>MIT</strong>, advised by
+            <a href="https://decode.mit.edu/" target="_blank" rel="noopener">Prof. Faez Ahmed</a> in the DeCoDe Lab, and a
+            Jamieson Presidential and GE Vernova Fellow.
+            My research turns meshes, images, and videos into <em>editable CAD</em>, generates and optimizes 3D designs from only
+            a few examples, and trains agents to use CAD software, with papers at <strong>NeurIPS</strong>, <strong>ICML</strong>,
+            and <strong>ASME IDETC</strong> (Best Paper).
+          </p>
+          <details class="more-bio">
+            <summary>More about me</summary>
           <p>
             I am a PhD student in Mechanical Engineering at <strong>MIT</strong>, advised by
             <a href="https://decode.mit.edu/" target="_blank" rel="noopener">Prof. Faez Ahmed</a> in the DeCoDe Lab,
@@ -152,6 +159,7 @@
             reinforcement learning, and neural decoding, and a BS in Mathematics and Physics at <strong>École Polytechnique</strong>,
             where I graduated as class valedictorian. I have also interned at <strong>Google</strong> and CNRS.
           </p>
+          </details>
         </div>
 
         <div class="interests" aria-label="Research interests">
@@ -209,6 +217,7 @@
       <div class="sc-view cf-view">
         <video id="cfVideo" src="assets/showcase/cadfit/cadfit_walkthrough.mp4" poster="assets/showcase/cadfit/cadfit_poster.jpg"
                autoplay muted loop playsinline preload="auto" aria-label="CADFit reconstructing a timing pulley from a mesh, step by step"></video>
+        <div class="cf-timeline" id="cfTimeline" aria-label="Walkthrough timeline"></div>
       </div>
       <aside class="sc-side">
         <div class="sc-head">
@@ -355,6 +364,7 @@
           </div>
           <p class="tldr">A hybrid optimization framework that recovers complex, editable CAD construction sequences (extrusions, revolutions, fillets, chamfers) from meshes by fitting and validating operations with IoU feedback. It sets the state of the art on DeepCAD, Fusion 360, and ABC, and also works end to end from photos.</p>
           <div class="pub-links">
+            <a class="btn demo" href="#cadfit"><svg><use href="#i-video"/></svg>Interactive demo</a>
             <a class="btn" href="https://arxiv.org/abs/2605.01171" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>arXiv</a>
             <a class="btn" href="https://ghadinehme.github.io/cadfit.github.io/" target="_blank" rel="noopener"><svg><use href="#i-web"/></svg>Project</a>
             <a class="btn" href="https://github.com/ghadinehme/CADFit" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a>
@@ -376,6 +386,7 @@
           <div class="venue">International Conference on Machine Learning (ICML), 2026 · with Toyota Research Institute</div>
           <p class="tldr">Aligns SDF decoders in a shared weight space and generates new designs by parameter-constrained affine mixing. It enables controlled interpolation from as few as 50 samples, safe extrapolation up to 100% beyond the training ranges, and performance-driven shape optimization, such as minimizing aerodynamic drag on DrivAerNet++ cars and BlendedNet aircraft.</p>
           <div class="pub-links">
+            <a class="btn demo" href="#lamp"><svg><use href="#i-video"/></svg>Interactive demo</a>
             <a class="btn" href="https://arxiv.org/abs/2510.22491" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>arXiv</a>
             <a class="btn" href="https://ghadinehme.github.io/lamp.github.io/" target="_blank" rel="noopener"><svg><use href="#i-web"/></svg>Project</a>
             <a class="btn" href="https://github.com/ghadinehme/LAMP" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a>
@@ -421,6 +432,7 @@
           </div>
           <p class="tldr">The first large-scale dataset for UI interaction in precision engineering software: 41K+ annotated videos of CAD operations with time horizons up to 20× longer than existing UI datasets. It also introduces VideoCADFormer, a model that learns CAD interactions from video, and a VQA benchmark for 3D spatial reasoning in multimodal LLMs.</p>
           <div class="pub-links">
+            <a class="btn demo" href="#videocad"><svg><use href="#i-video"/></svg>Interactive demo</a>
             <a class="btn" href="https://arxiv.org/abs/2505.24838" target="_blank" rel="noopener"><svg><use href="#i-pdf"/></svg>arXiv</a>
             <a class="btn" href="https://ghadinehme.github.io/videocad.github.io/" target="_blank" rel="noopener"><svg><use href="#i-web"/></svg>Project</a>
             <a class="btn" href="https://github.com/ghadinehme/VideoCAD" target="_blank" rel="noopener"><svg><use href="#i-code"/></svg>Code</a>
@@ -1043,6 +1055,6 @@
 <button class="icon-btn to-top" id="toTop" aria-label="Back to top"><svg><use href="#i-up"/></svg></button>
 
 <script src="assets/js/main.js?v=6"></script>
-<script src="assets/js/showcase.js?v=4"></script>
+<script src="assets/js/showcase.js?v=5"></script>
 </body>
 </html>

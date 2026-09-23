@@ -42,16 +42,16 @@
       ['extrude', 'plane_1 = cq.Plane(origin, normal, xDir)'],
       ['extrude', 'sketch_1 = cq.Workplane(plane_1)'],
       ['extrude', 'loop_1 = sketch_1.moveTo(p0)'],
-      ['extrude', 'loop_1 = loop_1.threePointArc(p1, p2)  <c># ×48, belt teeth</c>'],
+      ['extrude', 'loop_1 = loop_1.threePointArc(p1, p2)  <c># ×48</c>'],
       ['extrude', 'solid_1 = sketch_1.<k>extrude</k>(<n>0.57</n>)'],
       ['revolve', '<c># 2 · profile from an axis-aligned section</c>'],
       ['revolve', 'plane_2 = cq.Plane(origin, normal, xDir)'],
       ['revolve', 'sketch_2 = cq.Workplane(plane_2).moveTo(p0)'],
-      ['revolve', 'sketch_2 = sketch_2.lineTo(p1)  <c># ×11 segments</c>'],
+      ['revolve', 'sketch_2 = sketch_2.lineTo(p1)  <c># ×11</c>'],
       ['revolve', 'solid_2 = sketch_2.<k>revolve</k>(<n>360</n>, axisStart, axisEnd)'],
       ['greedy', 'result = solid_2.<k>union</k>(solid_1)'],
       ['residual', '<c># 3 · residual refinement</c>'],
-      ['residual', 'residual = extrude_a.union(extrude_b).union(extrude_c)'],
+      ['residual', 'residual = ex_a.union(ex_b).union(ex_c)'],
       ['residual', 'result = result.<k>cut</k>(residual)']
     ];
     var order = STAGES.map(function (s) { return s[0]; });
@@ -61,6 +61,24 @@
       return '<li><button type="button"><span class="ic">' + (i + 1) + '</span>' + s[1] + '</button></li>';
     }).join('');
     var items = stepsEl.querySelectorAll('li');
+    var tl = document.getElementById('cfTimeline');
+    if (tl) {
+      tl.innerHTML = STAGES.map(function (s, i) {
+        return '<button type="button" style="flex:' + s[2] + '" title="' + s[1] + '" aria-label="Jump to ' + s[1] + '"><i></i></button>';
+      }).join('');
+      var segs = tl.querySelectorAll('button');
+      segs.forEach(function (b, i) { b.addEventListener('click', function () { video.currentTime = starts[i] / 1000 + 0.05; video.play().catch(function () {}); sync(); }); });
+      var fillTL = function () {
+        var ms = (video.currentTime * 1000) % acc;
+        segs.forEach(function (b, i) {
+          var f = Math.max(0, Math.min(1, (ms - starts[i]) / STAGES[i][2]));
+          b.firstChild.style.transform = 'scaleX(' + f + ')';
+        });
+        if (!video.paused) requestAnimationFrame(fillTL);
+      };
+      video.addEventListener('play', function () { requestAnimationFrame(fillTL); });
+      video.addEventListener('seeked', fillTL);
+    }
     function fmt(l) {
       return l.replace(/<c>/g, '<span class="c-c">').replace(/<\/c>/g, '</span>').replace(/<k>/g, '<span class="c-k">')
         .replace(/<\/k>/g, '</span>').replace(/<n>/g, '<span class="c-n">').replace(/<\/n>/g, '</span>');
