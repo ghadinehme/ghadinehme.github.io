@@ -26,92 +26,120 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 
-  // ---------- CADFit (pre-rendered walkthrough video + synced steps/code) ----------
-  function initCadfit() {
-    var video = document.getElementById('cfVideo');
-    var stepsEl = document.getElementById('cfSteps');
-    var codeEl = document.getElementById('cfCode');
+  // ---------- Pre-rendered walkthrough videos with synced steps, code and timeline ----------
+  function fmtCode(l) {
+    return l.replace(/<c>/g, '<span class="c-c">').replace(/<\/c>/g, '</span>').replace(/<k>/g, '<span class="c-k">')
+      .replace(/<\/k>/g, '</span>').replace(/<n>/g, '<span class="c-n">').replace(/<\/n>/g, '</span>');
+  }
+  function initVideoPanel(cfg) {
+    var video = document.getElementById(cfg.video), stepsEl = document.getElementById(cfg.steps);
+    var codeEl = document.getElementById(cfg.code), panel = document.getElementById(cfg.panel);
     if (!video || !stepsEl) return;
-    var STAGES = [
-      ['mesh', 'Input mesh', 3000], ['sketch', 'Extract sections', 4200], ['extrude', 'Search: Extrude height', 5200],
-      ['revolve', 'Search: Revolve angle', 3800], ['greedy', 'IoU-guided selection', 3800],
-      ['residual', 'Residual refinement', 5200], ['done', 'Construction sequence', 4200]
-    ];
-    var CODE = [
-      ['revolve', '<c># 1 · profile from an axis-aligned section</c>'],
-      ['revolve', 'plane_1 = cq.Plane(origin, normal, xDir)'],
-      ['revolve', 'sketch_1 = cq.Workplane(plane_1).moveTo(p0)'],
-      ['revolve', 'sketch_1 = sketch_1.lineTo(p1)  <c># ×11</c>'],
-      ['revolve', 'solid_1 = sketch_1.<k>revolve</k>(<n>360</n>, axisStart, axisEnd)'],
-      ['greedy', 'result = solid_1  <c># IoU 0.952</c>'],
-      ['residual', '<c># 2 · residual R⁺: missing belt teeth</c>'],
-      ['residual', 'plane_2 = cq.Plane(origin, normal, xDir)'],
-      ['residual', 'loop_2 = cq.Workplane(plane_2).moveTo(p0)'],
-      ['residual', 'loop_2 = loop_2.threePointArc(p1, p2)  <c># ×48</c>'],
-      ['residual', 'solid_2 = loop_2.<k>extrude</k>(<n>0.57</n>)'],
-      ['residual', 'result = result.<k>union</k>(solid_2)  <c># IoU 0.993</c>']
-    ];
+    var STAGES = cfg.stages, CODE = cfg.codeLines;
     var order = STAGES.map(function (s) { return s[0]; });
-    var starts = []; var acc = 0;
+    var starts = [], acc = 0;
     STAGES.forEach(function (s) { starts.push(acc); acc += s[2]; });
     stepsEl.innerHTML = STAGES.map(function (s, i) {
       return '<li><button type="button"><span class="ic">' + (i + 1) + '</span>' + s[1] + '</button></li>';
     }).join('');
     var items = stepsEl.querySelectorAll('li');
-    var tl = document.getElementById('cfTimeline');
-    if (tl) {
-      tl.innerHTML = STAGES.map(function (s, i) {
-        return '<button type="button" style="flex:' + s[2] + '" title="' + s[1] + '" aria-label="Jump to ' + s[1] + '"><i></i></button>';
-      }).join('');
-      var segs = tl.querySelectorAll('button');
-      segs.forEach(function (b, i) { b.addEventListener('click', function () { video.currentTime = starts[i] / 1000 + 0.05; video.play().catch(function () {}); sync(); }); });
-      var fillTL = function () {
-        var ms = (video.currentTime * 1000) % acc;
-        segs.forEach(function (b, i) {
-          var f = Math.max(0, Math.min(1, (ms - starts[i]) / STAGES[i][2]));
-          b.firstChild.style.transform = 'scaleX(' + f + ')';
-        });
-        if (!video.paused) requestAnimationFrame(fillTL);
-      };
-      video.addEventListener('play', function () { requestAnimationFrame(fillTL); });
-      video.addEventListener('seeked', fillTL);
-    }
-    function fmt(l) {
-      return l.replace(/<c>/g, '<span class="c-c">').replace(/<\/c>/g, '</span>').replace(/<k>/g, '<span class="c-k">')
-        .replace(/<\/k>/g, '</span>').replace(/<n>/g, '<span class="c-n">').replace(/<\/n>/g, '</span>');
-    }
-    var cur = -1;
-    function setStage(si) {
-      if (si === cur) return; cur = si;
+    var curKey = '';
+    function setStage(si, ms) {
+      // code lines may carry a time (ms from video start) so they appear exactly when shown in the video
+      var vis = CODE.filter(function (c) {
+        var k = order.indexOf(c[0]);
+        return k < si || (k === si && (c[2] == null || ms >= c[2]));
+      });
+      var key = si + ':' + vis.length;
+      if (key === curKey) return; curKey = key;
       items.forEach(function (li, i) { li.classList.toggle('done', i < si); li.classList.toggle('active', i === si); });
-      var html = CODE.filter(function (c) { return order.indexOf(c[0]) <= si; }).map(function (c) {
-        return c[0] === order[si] ? '<span class="c-new">' + fmt(c[1]) + '</span>' : fmt(c[1]);
+      var timed = vis.filter(function (c) { return c[0] === order[si] && c[2] != null; });
+      var latest = timed.length ? timed[timed.length - 1] : null;
+      var html = vis.map(function (c) {
+        var hot = c[0] === order[si] && (latest ? c === latest : true);
+        return hot ? '<span class="c-new">' + fmtCode(c[1]) + '</span>' : fmtCode(c[1]);
       }).join('\n');
-      codeEl.innerHTML = html || '<span class="c-c"># construction sequence appears here</span>';
+      codeEl.innerHTML = html || '<span class="c-c"># program appears here</span>';
       codeEl.scrollTop = codeEl.scrollHeight;
     }
     function sync() {
       var ms = (video.currentTime * 1000) % acc, si = 0;
       for (var i = 0; i < starts.length; i++) if (ms >= starts[i]) si = i;
-      setStage(si);
+      setStage(si, ms);
     }
+    function seek(i) { video.currentTime = starts[i] / 1000 + 0.05; video.play().catch(function () {}); sync(); }
     video.addEventListener('timeupdate', sync);
     video.addEventListener('seeked', sync);
-    items.forEach(function (li, i) {
-      li.querySelector('button').addEventListener('click', function () {
-        video.currentTime = starts[i] / 1000 + 0.05; video.play().catch(function () {}); sync();
-      });
-    });
-    setStage(0);
-    if (reduceMotion) { video.removeAttribute('autoplay'); video.pause(); video.currentTime = starts[6] / 1000 + 1; }
-    // only play while visible
+    items.forEach(function (li, i) { li.querySelector('button').addEventListener('click', function () { seek(i); }); });
+    var tl = document.getElementById(cfg.timeline);
+    if (tl) {
+      tl.innerHTML = STAGES.map(function (s) {
+        return '<button type="button" style="flex:' + s[2] + '" title="' + s[1] + '" aria-label="Jump to ' + s[1] + '"><i></i></button>';
+      }).join('');
+      var segs = tl.querySelectorAll('button');
+      segs.forEach(function (b, i) { b.addEventListener('click', function () { seek(i); }); });
+      var fillTL = function () {
+        var ms = (video.currentTime * 1000) % acc;
+        segs.forEach(function (b, i) { b.firstChild.style.transform = 'scaleX(' + Math.max(0, Math.min(1, (ms - starts[i]) / STAGES[i][2])) + ')'; });
+        if (!video.paused) requestAnimationFrame(fillTL);
+      };
+      video.addEventListener('play', function () { requestAnimationFrame(fillTL); });
+      video.addEventListener('seeked', fillTL);
+    }
+    setStage(0, 0);
+    function canPlay() { return !reduceMotion && !panel.hidden; }
+    if (reduceMotion) { video.removeAttribute('autoplay'); video.pause(); }
+    var onScreen = false;
     if ('IntersectionObserver' in window) new IntersectionObserver(function (e) {
-      if (reduceMotion) return;
-      if (e[0].isIntersecting && !document.getElementById('panel-cadfit').hidden) video.play().catch(function () {});
-      else video.pause();
+      onScreen = e[0].isIntersecting;
+      if (onScreen && canPlay()) video.play().catch(function () {}); else video.pause();
     }).observe(video);
     document.addEventListener('showcase:tab', function (e) {
-      if (e.detail === 'cadfit' && !reduceMotion) video.play().catch(function () {}); else video.pause();
+      if (e.detail === cfg.tab && !reduceMotion) { video.preload = 'auto'; video.play().catch(function () {}); } else video.pause();
+    });
+  }
+
+  function initCadfit() {
+    initVideoPanel({
+      video: 'cfVideo', steps: 'cfSteps', code: 'cfCode', timeline: 'cfTimeline', panel: 'panel-cadfit', tab: 'cadfit',
+      stages: [['mesh', 'Input mesh', 3000], ['sketch', 'Extract sections', 4200], ['extrude', 'Search: Extrude height', 5200],
+        ['revolve', 'Search: Revolve angle', 3800], ['greedy', 'IoU-guided selection', 3800],
+        ['residual', 'Residual refinement', 5200], ['done', 'Construction sequence', 4200]],
+      codeLines: [
+        ['revolve', '<c># 1 · profile from an axis-aligned section</c>'],
+        ['revolve', 'plane_1 = cq.Plane(origin, normal, xDir)'],
+        ['revolve', 'sketch_1 = cq.Workplane(plane_1).moveTo(p0)'],
+        ['revolve', 'sketch_1 = sketch_1.lineTo(p1)  <c># ×11</c>'],
+        ['revolve', 'solid_1 = sketch_1.<k>revolve</k>(<n>360</n>, axisStart, axisEnd)'],
+        ['greedy', 'result = solid_1  <c># IoU 0.952</c>'],
+        ['residual', '<c># 2 · residual R⁺: missing belt teeth</c>'],
+        ['residual', 'plane_2 = cq.Plane(origin, normal, xDir)'],
+        ['residual', 'loop_2 = cq.Workplane(plane_2).moveTo(p0)'],
+        ['residual', 'loop_2 = loop_2.threePointArc(p1, p2)  <c># ×48</c>'],
+        ['residual', 'solid_2 = loop_2.<k>extrude</k>(<n>0.57</n>)'],
+        ['residual', 'result = result.<k>union</k>(solid_2)  <c># IoU 0.993</c>']
+      ]
+    });
+  }
+
+  function initStepcad() {
+    initVideoPanel({
+      video: 'stVideo', steps: 'stSteps', code: 'stCode', timeline: 'stTimeline', panel: 'panel-stepcad', tab: 'stepcad',
+      stages: [['mesh', 'Input mesh', 2800], ['pcl', 'Sample target point cloud', 2600], ['policy', 'LLM policy: step by step', 9600],
+        ['refine', 'Search: refine parameters', 3400], ['sketch', 'Search: modify sketch', 3000],
+        ['skip', 'Search: skip operation', 3200], ['done', 'CAD program', 3800]],
+      codeLines: [
+        ['policy', '<c># policy π(aₜ | target, current state)</c>', 5400],
+        ['policy', 's = cq.Workplane(<n>"XY"</n>).rect(<n>80</n>, <n>50</n>).<k>extrude</k>(<n>10</n>)', 5400],
+        ['policy', 's = s.union(profile(h=<n>22</n>).<k>revolve</k>(<n>360</n>))', 7000],
+        ['policy', 's = s.<k>cut</k>(bore(r=<n>7</n>))', 8600],
+        ['policy', 's = s.<k>cut</k>(slots(w=<n>10</n>))', 10200],
+        ['policy', 's = s.union(block(<n>14</n>, <n>8</n>, <n>12</n>))', 11800],
+        ['policy', 's = s.edges(<n>"|Z"</n>).<k>fillet</k>(<n>5</n>)  <c># IoU 0.874</c>', 13400],
+        ['refine', '<c># edit 1 · refine: boss h 22 → 30   IoU 0.944</c>'],
+        ['sketch', '<c># edit 2 · sketch: slot w 10 → 6    IoU 0.973</c>'],
+        ['skip', '<c># edit 3 · skip block operation      IoU 0.999</c>']
+      ]
     });
   }
 
@@ -235,15 +263,16 @@
 
   var initers = { lamp: initLamp, videocad: initVideoCAD };
   initCadfit();
+  initStepcad();
   // deep links: #cadfit, #lamp, #videocad open that tab
   function fromHash() {
     var h = location.hash.slice(1);
-    if (['cadfit', 'lamp', 'videocad'].indexOf(h) !== -1) { show(h); root.scrollIntoView(); }
+    if (['cadfit', 'stepcad', 'lamp', 'videocad'].indexOf(h) !== -1) { show(h); root.scrollIntoView(); }
   }
   window.addEventListener('hashchange', fromHash);
   fromHash();
   var qTab = new URLSearchParams(location.search).get('sctab');   // ?sctab=lamp (previews)
-  if (qTab && initers[qTab]) show(qTab);
+  if (qTab && root.querySelector('.sc-tab[data-tab="' + qTab + '"]')) show(qTab);
   // preload the other panels once the section is near the viewport
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (e) {

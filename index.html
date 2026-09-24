@@ -202,6 +202,7 @@
       </div>
       <div class="sc-tabs" role="tablist" aria-label="Research showcase">
         <button class="sc-tab active" role="tab" aria-selected="true" data-tab="cadfit">CADFit</button>
+        <button class="sc-tab" role="tab" aria-selected="false" data-tab="stepcad">StepCAD</button>
         <button class="sc-tab" role="tab" aria-selected="false" data-tab="lamp">LAMP</button>
         <button class="sc-tab" role="tab" aria-selected="false" data-tab="videocad">VideoCAD</button>
       </div>
@@ -222,6 +223,24 @@
         <ol class="cf-steps" id="cfSteps"></ol>
         <pre class="sc-code" id="cfCode" aria-label="CadQuery program"></pre>
         <div class="sc-links"><a href="publications.html#pub-cadfit">Paper</a><a href="https://ghadinehme.com/cadfit.github.io/" target="_blank" rel="noopener">Project page</a><a href="https://github.com/ghadinehme/CADFit" target="_blank" rel="noopener">Code</a><a href="https://www.youtube.com/watch?v=YBYm-moWSEs" target="_blank" rel="noopener">Video</a></div>
+      </aside>
+    </div>
+
+    <!-- StepCAD -->
+    <div class="sc-stage sc-panel" id="panel-stepcad" data-panel="stepcad" role="tabpanel" hidden>
+      <div class="sc-view cf-view">
+        <video id="stVideo" src="assets/showcase/stepcad/stepcad_walkthrough.mp4" poster="assets/showcase/stepcad/stepcad_poster.jpg"
+               muted loop playsinline preload="none" aria-label="StepCAD generating a CAD program step by step and refining it with tree search"></video>
+        <div class="cf-timeline" id="stTimeline" aria-label="Walkthrough timeline"></div>
+      </div>
+      <aside class="sc-side">
+        <div class="sc-head">
+          <span class="eyebrow">StepCAD · NeurIPS 2026</span>
+          <p>A state-conditioned LLM policy writes the CAD program <em>step by step</em>, then a geometry-guided tree search refines it with local edits ranked by IoU.</p>
+        </div>
+        <ol class="cf-steps" id="stSteps"></ol>
+        <pre class="sc-code" id="stCode" aria-label="CadQuery program"></pre>
+        <div class="sc-links"><a href="publications.html#pub-stepcad">Paper</a><a href="assets/papers/stepcad_neurips2026.pdf" target="_blank" rel="noopener">PDF</a></div>
       </aside>
     </div>
 
@@ -396,6 +415,6 @@
 <button class="icon-btn to-top" id="toTop" aria-label="Back to top"><svg><use href="#i-up"/></svg></button>
 
 <script src="assets/js/main.js?v=7"></script>
-<script src="assets/js/showcase.js?v=6"></script>
+<script src="assets/js/showcase.js?v=8"></script>
 </body>
 </html>
