@@ -261,13 +261,55 @@
     });
   }
 
-  var initers = { lamp: initLamp, videocad: initVideoCAD };
+  // ---------- RoboBuilder: hardware loop (sim pass -> real failure -> redesign from video -> real pass) ----------
+  function initRoboBuilder() {
+    var BASE = 'assets/showcase/robobuilder/';
+    var AG = { opus: 'Opus 5.5', sonnet: 'Sonnet 5.5', astra: 'GPT-6 Astra', sol: 'GPT-6.1 Sol' };
+    var CASES = [
+      { id: 'bumps-l2-opus', ob: 'Bumps', l: 2, a: 'opus', mode: 'stalls at an edge', fail: 'Star wheels stall on a bump ridge.', redesign: 'Wheg walker on printed four-arm hubs; the agent also lowered the simulated rod friction from 0.39 to 0.30.' },
+      { id: 'wall-l2-astra', ob: 'Wall', l: 2, a: 'astra', mode: 'tips over', fail: 'Climbs the wall face, rears up and tips over.', redesign: 'Hoop-wheel walker on a printed rim with rubber feet.' },
+      { id: 'steps-l2-sol', ob: 'Steps', l: 2, a: 'sol', mode: 'stalls at an edge', fail: 'Stalls nose-up against the second riser.', redesign: 'Wide climber on four printed six-cleat cams, slow spur drive.' },
+      { id: 'rope-l2-opus', ob: 'Rope', l: 2, a: 'opus', mode: 'stalls at an edge', fail: 'Hangs below the cord across the whole span, then stops under the edge of the higher far deck.', redesign: 'Straddle-drum trolley: two flanged rubber drums ride on the cord and chain-driven deck wheels climb onto the far deck.' },
+      { id: 'bridge-l2-sonnet', ob: 'Bridge', l: 2, a: 'sonnet', mode: 'falls off', fail: 'Veers off the narrow plank a third of the way along.', redesign: 'Tandem rubber wheels with passive guides hanging beside the plank.' }
+    ];
+    var panel = document.getElementById('panel-robobuilder');
+    var casesEl = document.getElementById('rbCases');
+    var tiles = panel.querySelectorAll('.rb-tile');
+    var vids = panel.querySelectorAll('.rb-tile video');
+    var onScreen = false;
+    function active() { return !panel.hidden && onScreen && !reduceMotion; }
+    function playAll() { vids.forEach(function (v) { if (active()) v.play().catch(function () {}); else v.pause(); }); }
+    function pick(k) {
+      var c = CASES[k];
+      casesEl.querySelectorAll('button').forEach(function (b, j) { b.classList.toggle('active', j === k); b.setAttribute('aria-selected', j === k); });
+      tiles.forEach(function (t) {
+        var v = t.querySelector('video'), key = t.getAttribute('data-k');
+        v.poster = BASE + c.id + '-' + key + '.jpg';
+        v.src = BASE + c.id + '-' + key + '.mp4';
+        v.setAttribute('aria-label', c.ob + ' level ' + c.l + ', ' + AG[c.a] + ': ' + t.querySelector('figcaption').childNodes[1].textContent);
+      });
+      document.getElementById('rbMode').textContent = c.mode;
+      document.getElementById('rbFail').textContent = c.fail;
+      document.getElementById('rbRedesign').textContent = c.redesign;
+      playAll();
+    }
+    casesEl.innerHTML = CASES.map(function (c, k) {
+      return '<button type="button" role="tab" data-k="' + k + '">' + c.ob + ' L' + c.l + ' · ' + AG[c.a] + '</button>';
+    }).join('');
+    casesEl.querySelectorAll('button').forEach(function (b) { b.addEventListener('click', function () { pick(+b.getAttribute('data-k')); }); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { onScreen = e[0].isIntersecting; playAll(); }).observe(panel); else onScreen = true;
+    document.addEventListener('showcase:tab', function () { playAll(); });
+    pick(0);
+  }
+
+  var initers = { lamp: initLamp, videocad: initVideoCAD, robobuilder: initRoboBuilder };
   initCadfit();
   initStepcad();
-  // deep links: #cadfit, #lamp, #videocad open that tab
+  inited.robobuilder = true; initRoboBuilder();   // default tab
+  // deep links: #cadfit, #stepcad, #lamp, #videocad, #robobuilder open that tab
   function fromHash() {
     var h = location.hash.slice(1);
-    if (['cadfit', 'stepcad', 'lamp', 'videocad'].indexOf(h) !== -1) { show(h); root.scrollIntoView(); }
+    if (['cadfit', 'stepcad', 'lamp', 'videocad', 'robobuilder'].indexOf(h) !== -1) { show(h); root.scrollIntoView(); }
   }
   window.addEventListener('hashchange', fromHash);
   fromHash();

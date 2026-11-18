@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20">
+  <link rel="stylesheet" href="assets/css/style.css?v=21">
 
   <script>
     (function () {
@@ -211,18 +211,44 @@
         <p>Interactive walkthroughs built from real examples and data from the papers.</p>
       </div>
       <div class="sc-tabs" role="tablist" aria-label="Research showcase">
-        <button class="sc-tab active" role="tab" aria-selected="true" data-tab="cadfit">CADFit</button>
+        <button class="sc-tab active" role="tab" aria-selected="true" data-tab="robobuilder">RoboBuilder</button>
+        <button class="sc-tab" role="tab" aria-selected="false" data-tab="cadfit">CADFit</button>
+        <button class="sc-tab" role="tab" aria-selected="false" data-tab="videocad">VideoCAD</button>
         <button class="sc-tab" role="tab" aria-selected="false" data-tab="stepcad">StepCAD</button>
         <button class="sc-tab" role="tab" aria-selected="false" data-tab="lamp">LAMP</button>
-        <button class="sc-tab" role="tab" aria-selected="false" data-tab="videocad">VideoCAD</button>
       </div>
     </div>
 
+    <!-- RoboBuilder -->
+    <div class="sc-stage sc-panel active" id="panel-robobuilder" data-panel="robobuilder" role="tabpanel">
+      <div class="sc-view rb-view">
+        <div class="rb-cases" id="rbCases" role="tablist" aria-label="Choose a hardware-loop case"></div>
+        <div class="rb-grid" id="rbGrid">
+          <figure class="rb-tile" data-k="sim"><video muted loop playsinline preload="none"></video><figcaption><i>1</i>Agent's design in sim<span class="rb-st sim">crosses in sim</span></figcaption></figure>
+          <figure class="rb-tile" data-k="fail"><video muted loop playsinline preload="none"></video><figcaption><i>2</i>Built and run for real<span class="rb-st bad" id="rbMode">fails</span></figcaption></figure>
+          <figure class="rb-tile" data-k="resim"><video muted loop playsinline preload="none"></video><figcaption><i>3</i>Redesign after the video<span class="rb-st sim">crosses in sim</span></figcaption></figure>
+          <figure class="rb-tile" data-k="real"><video muted loop playsinline preload="none"></video><figcaption><i>4</i>Built again<span class="rb-st ok">crosses</span></figcaption></figure>
+        </div>
+      </div>
+      <aside class="sc-side">
+        <div class="sc-head">
+          <span class="eyebrow">RoboBuilder · Under review</span>
+          <p>Coding agents design a robot's <em>hardware and program</em>; every design that passes in simulation is <em>built by hand and tested for real</em>. When it fails, the agent watches the video, fixes its simulator and redesigns.</p>
+        </div>
+        <dl class="rb-story">
+          <dt>Real failure</dt><dd id="rbFail"></dd>
+          <dt>Redesign</dt><dd id="rbRedesign"></dd>
+        </dl>
+        <div class="sc-stats"><div><b>135</b><span>robots built by hand</span></div><div><b>66%</b><span>of sim passes hold for real</span></div><div><b>72%</b><span>of L1/L2 real failures fixed by the loop</span></div></div>
+        <div class="sc-links"><a href="publications.html#pub-robobuilder">Paper</a><a href="https://ghadinehme.com/robobuilder.github.io/" target="_blank" rel="noopener">Project page</a><a href="https://github.com/ghadinehme/RoboBuilder" target="_blank" rel="noopener">Code</a><a href="https://huggingface.co/datasets/DeCoDELab/RoboBuilder" target="_blank" rel="noopener">Dataset</a></div>
+      </aside>
+    </div>
+
     <!-- CADFit -->
-    <div class="sc-stage sc-panel active" id="panel-cadfit" data-panel="cadfit" role="tabpanel">
+    <div class="sc-stage sc-panel" id="panel-cadfit" data-panel="cadfit" role="tabpanel" hidden>
       <div class="sc-view cf-view">
         <video id="cfVideo" src="assets/showcase/cadfit/cadfit_walkthrough.mp4" poster="assets/showcase/cadfit/cadfit_poster.jpg"
-               autoplay muted loop playsinline preload="auto" aria-label="CADFit reconstructing a timing pulley from a mesh, step by step"></video>
+               muted loop playsinline preload="none" aria-label="CADFit reconstructing a timing pulley from a mesh, step by step"></video>
         <div class="cf-timeline" id="cfTimeline" aria-label="Walkthrough timeline"></div>
       </div>
       <aside class="sc-side">
@@ -233,6 +259,47 @@
         <ol class="cf-steps" id="cfSteps"></ol>
         <pre class="sc-code" id="cfCode" aria-label="CadQuery program"></pre>
         <div class="sc-links"><a href="publications.html#pub-cadfit">Paper</a><a href="https://ghadinehme.com/cadfit.github.io/" target="_blank" rel="noopener">Project page</a><a href="https://github.com/ghadinehme/CADFit" target="_blank" rel="noopener">Code</a><a href="https://www.youtube.com/watch?v=YBYm-moWSEs" target="_blank" rel="noopener">Video</a></div>
+      </aside>
+    </div>
+
+    <!-- VideoCAD -->
+    <div class="sc-stage sc-panel" id="panel-videocad" data-panel="videocad" role="tabpanel" hidden>
+      <div class="sc-view vc-view">
+        <div class="vc-modes" role="tablist" aria-label="VideoCAD views">
+          <button class="vc-mode active" data-mode="episodes" type="button">Dataset episodes</button>
+          <button class="vc-mode" data-mode="i2c" type="button">Image → CAD</button>
+          <button class="vc-mode" data-mode="auto" type="button">Autocomplete</button>
+        </div>
+        <div class="vc-pane" data-mode="episodes">
+          <div class="vc-browser">
+            <div class="vc-bar"><i></i><i></i><i></i><span>cad.onshape.com · VideoCAD episode <b id="vcId"></b></span></div>
+            <img id="vcVideo" alt="Automated agent building a CAD model in the Onshape interface">
+          </div>
+          <div class="vc-picker" id="vcPicker" aria-label="Choose an episode"></div>
+        </div>
+        <div class="vc-pane" data-mode="i2c" hidden>
+          <p class="vc-note">VideoCADFormer sees only a target image and the live UI, and operates Onshape action by action to build the CAD model.</p>
+          <div class="vc-grid" id="vcI2C"></div>
+        </div>
+        <div class="vc-pane" data-mode="auto" hidden>
+          <p class="vc-note">Starting from a partially built model, VideoCADFormer completes the design to match the target image.</p>
+          <div class="vc-grid auto" id="vcAuto"></div>
+        </div>
+      </div>
+      <aside class="sc-side">
+        <div class="sc-head">
+          <span class="eyebrow">VideoCAD · NeurIPS 2025</span>
+          <p>Real episodes from the dataset: an automated agent rebuilds human-made CAD models in Onshape, one UI action at a time.</p>
+        </div>
+        <div class="vc-policy">
+          <div class="vc-in"><img id="vcTarget" alt="Target shape" width="96" height="96"><span>Target shape <code>I</code></span></div>
+          <div class="vc-arrow">+ UI frames <code>o<sub>t−k:t</sub></code> &rarr; <b>VideoCADFormer</b> &rarr; next action <code>a<sub>t</sub></code></div>
+        </div>
+        <div class="vc-actions">
+          <span>MoveTo(x, y)</span><span>Click</span><span>PressKey(k, n)</span><span>Type(v)</span><span>Scroll(s)</span>
+        </div>
+        <div class="sc-stats"><div><b>41K+</b><span>annotated videos</span></div><div><b>186</b><span>actions per task on average</span></div><div><b>20&times;</b><span>longer than prior UI datasets</span></div></div>
+        <div class="sc-links"><a href="publications.html#pub-videocad">Paper</a><a href="https://ghadinehme.com/videocad.github.io/" target="_blank" rel="noopener">Project page</a><a href="https://github.com/ghadinehme/VideoCAD" target="_blank" rel="noopener">Code</a><a href="https://www.youtube.com/watch?v=1C6KqY-3Okw" target="_blank" rel="noopener">Video</a></div>
       </aside>
     </div>
 
@@ -289,46 +356,6 @@
       </aside>
     </div>
 
-    <!-- VideoCAD -->
-    <div class="sc-stage sc-panel" id="panel-videocad" data-panel="videocad" role="tabpanel" hidden>
-      <div class="sc-view vc-view">
-        <div class="vc-modes" role="tablist" aria-label="VideoCAD views">
-          <button class="vc-mode active" data-mode="episodes" type="button">Dataset episodes</button>
-          <button class="vc-mode" data-mode="i2c" type="button">Image → CAD</button>
-          <button class="vc-mode" data-mode="auto" type="button">Autocomplete</button>
-        </div>
-        <div class="vc-pane" data-mode="episodes">
-          <div class="vc-browser">
-            <div class="vc-bar"><i></i><i></i><i></i><span>cad.onshape.com · VideoCAD episode <b id="vcId"></b></span></div>
-            <img id="vcVideo" alt="Automated agent building a CAD model in the Onshape interface">
-          </div>
-          <div class="vc-picker" id="vcPicker" aria-label="Choose an episode"></div>
-        </div>
-        <div class="vc-pane" data-mode="i2c" hidden>
-          <p class="vc-note">VideoCADFormer sees only a target image and the live UI, and operates Onshape action by action to build the CAD model.</p>
-          <div class="vc-grid" id="vcI2C"></div>
-        </div>
-        <div class="vc-pane" data-mode="auto" hidden>
-          <p class="vc-note">Starting from a partially built model, VideoCADFormer completes the design to match the target image.</p>
-          <div class="vc-grid auto" id="vcAuto"></div>
-        </div>
-      </div>
-      <aside class="sc-side">
-        <div class="sc-head">
-          <span class="eyebrow">VideoCAD · NeurIPS 2025</span>
-          <p>Real episodes from the dataset: an automated agent rebuilds human-made CAD models in Onshape, one UI action at a time.</p>
-        </div>
-        <div class="vc-policy">
-          <div class="vc-in"><img id="vcTarget" alt="Target shape" width="96" height="96"><span>Target shape <code>I</code></span></div>
-          <div class="vc-arrow">+ UI frames <code>o<sub>t−k:t</sub></code> &rarr; <b>VideoCADFormer</b> &rarr; next action <code>a<sub>t</sub></code></div>
-        </div>
-        <div class="vc-actions">
-          <span>MoveTo(x, y)</span><span>Click</span><span>PressKey(k, n)</span><span>Type(v)</span><span>Scroll(s)</span>
-        </div>
-        <div class="sc-stats"><div><b>41K+</b><span>annotated videos</span></div><div><b>186</b><span>actions per task on average</span></div><div><b>20&times;</b><span>longer than prior UI datasets</span></div></div>
-        <div class="sc-links"><a href="publications.html#pub-videocad">Paper</a><a href="https://ghadinehme.com/videocad.github.io/" target="_blank" rel="noopener">Project page</a><a href="https://github.com/ghadinehme/VideoCAD" target="_blank" rel="noopener">Code</a><a href="https://www.youtube.com/watch?v=1C6KqY-3Okw" target="_blank" rel="noopener">Video</a></div>
-      </aside>
-    </div>
   </div>
 </section>
 
@@ -431,6 +458,6 @@
 <button class="icon-btn to-top" id="toTop" aria-label="Back to top"><svg><use href="#i-up"/></svg></button>
 
 <script src="assets/js/main.js?v=7"></script>
-<script src="assets/js/showcase.js?v=8"></script>
+<script src="assets/js/showcase.js?v=10"></script>
 </body>
 </html>
