@@ -582,7 +582,7 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 .pub .thumb .venue-badge { left: auto; right: 8px; top: 8px; font-size: .66rem; padding: 3px 7px; background: rgba(22,24,29,.82); backdrop-filter: blur(4px); }
 
 /* ---------- Videos ---------- */
-.videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.videos { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 .video-card { all: unset; box-sizing: border-box; cursor: pointer; position: relative; display: block; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: #0b1422; border: 1px solid var(--line); box-shadow: var(--shadow); transition: transform .2s, box-shadow .2s; }
 .video-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 .video-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
